@@ -1,0 +1,151 @@
+<div class="superadmin">
+  <div *ngIf="nextFlag" class="panel panel-primary">
+    <div class="panel-heading">User Registration
+         <button type="button" (click)="Closer()" class="close text-right" style="width:fit-content; color:black">&times;</button>
+    </div>
+    <form #userForm="ngForm" (ngSubmit)="sGetUser(userForm)">
+    <div class="panel-body">
+        <div class="row text-center">
+          <div class="col-md-6">
+            <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  <input type="text" class="form-control has-success has-error has-feedback alpha_bet" placeholder="First Name *" required ngModel minlength="2" pattern="[a-zA-Z][a-zA-Z]+" title="Must contain only Alphabets" name="fname" maxlength="19"  #fn="ngModel">
+                  <span *ngIf="fn.dirty || fn.touched">
+                    <span *ngIf="fn.errors" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span *ngIf="!fn.errors" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+                  </span>
+                </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  <input type="text" class="form-control has-success has-error has-feedback alpha_bet" placeholder="Last Name *" required ngModel maxlength="19" minlength="2" pattern="[a-zA-Z][a-zA-Z]+" title="Must contain only Alphabets" name="lname" #ln="ngModel">
+                  <span *ngIf="ln.dirty || ln.touched">
+                    <span *ngIf="ln.errors" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span *ngIf="!ln.errors" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+                  </span>
+            </div>
+          </div>                    
+        </div>
+
+        <div class="row">
+        <div class="col-md-12">
+            <div class="input-group" id="genderbox" >
+                  <span class="input-group-addon"><i class="fa fa-female"></i> | <i class="fa fa-female"></i></span>
+                  <select class="form-control" required name="gender" ngModel>
+                    <option value="" selected>Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+              </div>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-home"></i></span>
+              <input type="text" placeholder="Street" class="form-control" name="street" maxlength="50" ngModel>
+            </div>	
+          </div>
+        
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-flag-checkered"></i></span>
+              <select class="form-control" name="country" (change)="CtrChange($event.target.value)" [(ngModel)]="RestCountry" required disabled>
+                <option value="" selected>Country *</option>
+                <option *ngFor="let i of DDown" [value]="i.Country">{{i.Country}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="input-group"><span class="input-group-addon"><i class="fa fa-building"></i></span>
+              <select class="form-control" name="city" [(ngModel)]="RestCity" required disabled>
+                <option value="" selected>Nearest City *</option>
+                <option *ngFor="let j of cities" [value]="j">{{j}}</option>
+              </select>
+            </div>	
+          </div>		
+        </div>
+
+        <div class="row text-center">  
+          <div class="col-md-6">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                  <input type="email" class="form-control has-success has-error has-feedback" placeholder="Email *" required name="email" pattern="[a-zA-Z0-9!#$%&'*+-/=?^_`{|}~.]+@[a-zA-Z0-9.-]+\.[a-z]{2,3}$" minlength="6" maxlength="30" title="Eg:- abc123@domain.com" ngModel #mail="ngModel">
+                  <span *ngIf="mail.dirty || mail.touched">
+                    <span *ngIf="mail.errors" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span *ngIf="!mail.errors" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+                  </span>
+              </div>
+          </div>
+          <div class="col-md-6 text-left">
+            <div class="input-group">
+                  <span class="input-group-addon" style="padding:0"><input type="number" class="form-control" style="width:5em" [(ngModel)]="Ccode" required name="mcc" min="1" max="999" ngModel disabled></span>
+                  <input type="text" class="form-control has-success has-error has-feedback moby" placeholder="Mobile *" required name="mob" pattern="[0-9]{10}" minlength="10" maxlength="10" title="A Valid 10 Digit Number" ngModel #mob="ngModel">
+                  <span *ngIf="mob.dirty || mob.touched">
+                    <span *ngIf="mob.errors" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span *ngIf="!mob.errors" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+                  </span>
+            </div>
+          </div>                    
+        </div>
+
+        <div class="row text-center">  
+          <div class="col-md-6">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                  <input id="passo1" type="password" class="form-control has-success has-error has-feedback passo" placeholder="PassWord **" required name="pass" maxlength="20" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Minimum 8 Characters long with at least One Uppercase, One Lowercase & One digit" ngModel #pass="ngModel" [(ngModel)]="password">
+                  <span *ngIf="pass.dirty || pass.touched">
+                    <span *ngIf="pass.errors" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span *ngIf="!pass.errors" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+                  </span>
+              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                  <input id="passo2" type="password" class="form-control has-success has-error has-feedback" placeholder="Confirm PassWord **" required name="cpass" title="Same as Password" ngModel #cpass="ngModel" [(ngModel)]="cpassword">
+                  <span *ngIf="cpass.dirty || cpass.touched">
+                    <span *ngIf="cpassword!=password || cpassword==empty" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span *ngIf="cpassword==password && cpassword!=empty" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+                  </span>
+            </div>
+          </div>                    
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="row" style="border-bottom: 1px solid #ddd">
+          <div id="eyeball" class="col-md-12"><button type="button" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i><a style="cursor:pointer" (click)="ShoPass()"> Show Password</a></button></div><br><br>
+          <div class="col-md-5" style="color: #337ab7">* Fields are mandatory</div>
+          <div class="col-md-2"></div>
+          <div class="col-md-12" style="color: #337ab7">** Minimum 8 Characters long with at least 1 Uppercase, 1 Lowercase & 1 digit</div><br><br>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <button type="reset" class="btn btn-warning">Reset <i class="fa fa-refresh"></i></button>
+          </div>
+          <div class="col-md-6 text-right">
+            <button type="submit" class="btn btn-warning">Submit <i class="fa fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="!nextFlag" class="well">
+    <div class="alert alert-success">You have Successfully Added User !!!</div><br>
+    <div class="row">
+      <div class="col-xs-4">
+        <button (click)="usList()" class="btn btn-success"><i class="fa fa-hand-o-right"></i> Go To Users List</button>
+      </div>
+      <div class="col-xs-4">
+        <button (click)="Back()" class="btn btn-success"><i class="fa fa-hand-o-right"></i> Add Another User</button>
+      </div>
+      <div class="col-xs-4">
+        <button (click)="Redirec()" class="btn btn-success"><i class="fa fa-hand-o-right"></i> Make a Booking</button>
+      </div>
+    </div>      
+  </div>
+</div>

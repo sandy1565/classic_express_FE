@@ -1,0 +1,13 @@
+<div class="wrapper">
+    
+    <!-- Admin & SuperAdmin Sidebars Toggle -->
+    <div class="sidebar">
+        <app-superadminsidebar *ngIf=!superadminSidebarVisible></app-superadminsidebar>
+        <app-adminsidebar *ngIf=!adminSidebarVisible></app-adminsidebar>
+    </div>
+
+    <!-- Index Navbar Toggle -->
+    <div class="main-panel">
+        <app-navbar *ngIf=!navbarVisible></app-navbar>
+    </div>
+</div>

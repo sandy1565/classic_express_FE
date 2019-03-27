@@ -1,0 +1,27 @@
+[
+    {
+        "Country":"India",
+        "Ccode":91,
+        "Cities":["New Delhi","Mumbai","Calcutta","Chennai","Bengaluru","Bhopal","Jaipur","Lucknow","Bhuwaneshwar","Chandigarh","Guwahati"]
+    },
+    {
+        "Country":"USA",
+        "Ccode":1,
+        "Cities":["Seattle","Los Angeles","Austin","Oklahoma City","Chicago","Las Vegas","Birmingham","Pittsburgh","Washington DC","Miami"]
+    },
+    {
+        "Country":"UK",
+        "Ccode":44,
+        "Cities":["London","Bristol","Leicester","Cardiff","Manchester","NewCastle","EdinBurgh","Dundee","Belfast","Liverpool"]
+    },
+    {
+        "Country":"Canada",
+        "Ccode":1,
+        "Cities":["WhiteHorse","YellowKnife","Vacouver","Ottawa","Cambridge Bay","Kitchener","Edmonton","Quebec City","Hamilton"]
+    },
+    {
+        "Country":"Australia",
+        "Ccode":61,
+        "Cities":["Perth","Sydney","Melbourne","Canberra","Katherine","Queensland","Adelaide","Brisbane"]
+    }
+]

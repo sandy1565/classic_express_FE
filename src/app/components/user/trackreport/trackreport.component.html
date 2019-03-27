@@ -1,0 +1,59 @@
+<div class="well">
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" class="close text-right" (click)="Closer()" style="width:fit-content; color:black">&times;</button>
+            <h3>Track Report <i class="fa fa-line-chart" aria-hidden="true"></i></h3>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-4">
+            <h4>AWB Number: <h4 style="display:inline;color:black">{{trId}}</h4></h4>
+        </div>
+        <div class="col-xs-4 text-center">
+            <h4>Order Id: <h4 style="display:inline;color:black">{{OrdId}}</h4></h4>
+        </div>
+        <div class="col-xs-4 text-right">
+            <h4>Mode: <i *ngIf="x==1" class="fa fa-plane" aria-hidden="true"></i><i *ngIf="x==2" class="fa fa-ship" aria-hidden="true"></i><i *ngIf="x==3" class="fa fa-truck" aria-hidden="true"></i></h4>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12">
+            <h5>Progress Bar</h5>
+        </div>
+    </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-info progress-bar-striped active"  role="progressbar">MyBar</div>
+        <div class="progress-bar progress-bar-info progress-bar-striped active"  role="progressbar">MyBar</div>
+        <div class="progress-bar progress-bar-info progress-bar-striped active"  role="progressbar">MyBar</div>
+        <div class="progress-bar progress-bar-info progress-bar-striped active"  role="progressbar">MyBar</div>
+        <div class="progress-bar progress-bar-info progress-bar-striped active"  role="progressbar">MyBar</div>
+        <div class="progress-bar progress-bar-info progress-bar-striped active"  role="progressbar">MyBar</div>
+        <div class="progress-bar progress-bar-info progress-bar-striped active"  role="progressbar">MyBar</div>
+        <div class="progress-bar progress-bar-info progress-bar-striped active"  role="progressbar">MyBar</div>
+        <div class="progress-bar progress-bar-info progress-bar-striped active"  role="progressbar">MyBar</div>
+      </div>
+      <hr>
+    <div class="row">
+      <div class="col-xs-6 text-left">
+        <h4>From: <h4 style="display:inline;color:black">{{TrackObj.fromAdd}}</h4></h4>
+      </div>
+      <div class="col-xs-6 text-right">
+        <h4>To: <h4 style="display:inline;color:black">{{TrackObj.toAdd}}</h4></h4>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>Order Details :</h4>
+          <div class="details">
+            <label>Booking Date   : <label style="color: #ffca28">{{TrackObj.bDate}}</label></label><br>
+            <label>Total Weight   : <label style="color: #ffca28">{{OrdObj.weight}}</label></label><br>
+            <label>Total Price    : <label style="color: #ffca28">{{OrdObj.price}}</label></label><br>
+            <label *ngIf="OrdObj.pystat">Payment Status : <label style="color: #ffca28">Received</label></label>
+            <label *ngIf="!OrdObj.pystat">Payment Status : <label style="color: #ffca28">Remaining</label></label>
+          </div>
+      </div>
+    </div>
+</div>

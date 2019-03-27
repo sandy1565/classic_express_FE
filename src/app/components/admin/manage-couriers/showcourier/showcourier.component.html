@@ -1,0 +1,69 @@
+<div class="admin">  
+    <div class="well" style="background-color: #f5ab35">
+        <h3 style="color:black">Linked Orders</h3>
+    </div>
+    <div class="container-fluid">
+        <table class="table table-hover table-bordered table-responsive">
+            <thead class="thead-inverse">
+                <tr>
+                <th>S.No</th>
+                <th>User Id</th>
+                <th>Order Id</th>
+                <th>Track Id</th>
+                <th>From Admin</th>
+                <th>To Admin</th>
+                <th>Current Status</th>
+                <th>Previous Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of Darr; let j=index">
+                    <td>{{j+1}}</td>
+                    <td>{{i.userid}}</td>
+                    <td>{{i.consign_id}}</td>
+                    <td>{{i.trackid}}</td>
+                    <td>{{i.pckAdminid}}</td>
+                    <td>{{i.rcvAdminid}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success prev" (click)="pClicko(j,i.consign_id)" data-toggle="modal" data-target="#Pstate" [disabled]="plimit[j]"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-success stats" disabled>{{i.curStatus}}</button>
+                            <button type="button" class="btn btn-success next" (click)="nClicko(j,i.consign_id)" data-toggle="modal" data-target="#Nstate" [disabled]="nlimit[j]" ><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        </div>
+
+                        <div id="Pstate" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Rollback Current Status ?</h4>
+                                </div>
+                                <div class="modal-body" style="width:100%">
+                                    <button type="button" class="btn btn-danger"  (click)="PStatChange()" data-dismiss="modal">Proceed</button>
+                                    <button type="button" class="btn btn-warning" style="float:right" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div id="Nstate" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Change Current Status ?</h4>
+                                </div>
+                                <div class="modal-body" style="width:100%">
+                                    <button type="button" class="btn btn-danger" (click)="StatChange()" data-dismiss="modal">Proceed</button>
+                                    <button type="button" class="btn btn-warning" style="float:right" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </td>    
+                    <td><button type="button" class="btn btn-primary stats" disabled>{{i.prevStatus}}</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

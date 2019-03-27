@@ -1,0 +1,57 @@
+<div class="superadmin">
+  
+  <div class="well">
+      <div class="row">
+        <div class="col-xs-4 text-center">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span> 
+            <input type="text" class="form-control" placeholder="User Id" [(ngModel)]="U_id" >
+          </div>
+        </div>
+        <div class="col-xs-4 text-center">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span> 
+            <input type="text" class="form-control" placeholder="Order Id" [(ngModel)]="O_id" >
+          </div>
+        </div>
+        <div class="col-xs-4 text-center">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span> 
+            <select class="form-control" (change)="StatChange($event.target.value)">
+              <option value="" selected>Payment Status</option>
+              <option value="Remaining">Remaining</option>
+              <option value="Received">Received</option>
+            </select>
+          </div>
+        </div>
+      </div>
+  </div>
+
+<div class="container-fluid" style="margin-top:60px">
+  <table class="table table-hover table-bordered table-responsive">
+    <thead class="thead-inverse">
+    <tr>
+      <th>S.No</th>
+      <th>User Id</th>
+      <th>Order Id</th>
+      <th><i class="fa fa-inr" aria-hidden="true"></i> | <i class="fa fa-usd" aria-hidden="true"></i> Total Payment</th>
+      <th><i class="fa fa-twitch" aria-hidden="true"></i> Payment Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of P_arr | pyPipe : U_id : O_id : stat; let j=index">
+      <td>{{j+1}}</td>
+      <td>{{i.userId}}</td>
+      <td>{{i.conId}}</td>
+      <td>{{i.price}}</td>
+      <td><button *ngIf="i.pystat" class="btn btn-info">Received</button><button *ngIf="!i.pystat" class="btn btn-info">Remaining</button></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<!--
+  
+  -->

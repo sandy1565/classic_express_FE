@@ -1,0 +1,29 @@
+.well{
+    width:60%;
+    background-color: transparent;
+    margin:auto;
+    border-color: limegreen;
+}
+
+.form-control{
+    text-transform: none;
+}
+
+input::placeholder, input, select{
+    color:black;
+}
+
+label{
+    margin-top:6px;
+    color:#fff;
+}
+
+select{
+    padding:0;
+    padding-left:5px;
+}
+
+legend{
+    text-align: left;
+    color:#e0c2ba;
+}

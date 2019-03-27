@@ -1,0 +1,21 @@
+
+.well{
+    width:50%;
+    background-color: transparent;
+    margin:auto;
+    padding-top:4px;
+}
+
+label{
+    margin-top:6px;
+    color:black;
+}
+
+.form-control{
+    text-transform: none;
+    color: black;
+}
+
+button{
+    width:10em;    
+}

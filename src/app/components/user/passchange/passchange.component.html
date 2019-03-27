@@ -1,0 +1,81 @@
+<div class="well">
+    <div class="row">
+        <form class="form-horizontal" #fval="ngForm">
+            <fieldset>
+            <legend style="color:black">Change Password</legend>
+            <br>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="id">User ID</label>  
+                <div class="col-md-6">
+                    <input name="id" type="text" placeholder="User Id" class="form-control" [(ngModel)]="Darr.userId" disabled> 
+                </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cpass">Current Password</label>  
+                <div class="col-md-6">
+                    <input name="cpass" type="password" placeholder="Current Password" class="form-control" maxlength="20" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Minimum 8 Characters long with at least One Uppercase, One Lowercase & One digit" required ngModel [(ngModel)]="cur_pass"> 
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cpass">New Password</label>  
+                <div class="col-md-6">
+                    <input name="npass" id="npass" type="password" placeholder="New Password" class="form-control" maxlength="20" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Minimum 8 Characters long with at least One Uppercase, One Lowercase & One digit" required ngModel [(ngModel)]="new_pass"> 
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cpass">Confirm New Password</label>  
+                <div class="col-md-6">
+                    <input name="conpass" id="conpass" type="password" placeholder="Confirm Password" class="form-control" maxlength="20" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Minimum 8 Characters long with at least One Uppercase, One Lowercase & One digit" required ngModel [(ngModel)]="con_pass"> 
+                </div>
+            </div>
+            </fieldset>
+          <hr>
+          <div class="col-md-12" style="color: #ffca28">Passwords must be Minimum 8 Characters long with at least 1 Uppercase, 1 Lowercase & 1 digit</div><br><br>
+            <div class="col-md-4">
+                    <button type="button" (click)="ShoPass()" class="btn btn-primary">Show Password</button> 
+            </div>
+            <div class="col-md-4">
+                     
+            </div>
+            <div class="col-md-4">
+                    <button [disabled]="!fval.valid" type="submit" (click)="Pchange()" data-toggle="modal" data-target="#Passo" class="btn btn-success">Change</button> 
+            </div>
+          </form>
+
+          <div id="Passo" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Pass Changer</h4>
+                        </div>
+                        <div class="modal-body" style="width:100%">
+                            <div class="row" style="margin-top:30px">
+                                <div *ngIf="Checker" class="alert alert-danger">
+                                    Current Password Does Not Match
+                                </div>
+                                <div *ngIf="blocker" class="alert alert-danger">
+                                    New Password Mismatch
+                                </div>  
+                                <div *ngIf="OTP_dialog">
+                                    <div *ngIf="!rowOn" class="container text-align">
+                                        <label>Enter OTP: </label><input type="text" name="eotp" [(ngModel)]="otp"><br><hr><br>
+                                        <button class="btn btn-primary" (click)="Confirm()" data-dismiss="modal">Submit</button>
+                                    </div>
+                                    <div *ngIf="rowOn" class="container">
+                                        <label>OTP will be sent to your Mobile No: </label><input type="text" name="mob" [(ngModel)]="newmob" disabled><br><hr><br>
+                                        <button type="button" class="btn btn-danger" (click)="SendOTP()">Proceed</button>
+                                        <button type="button" class="btn btn-warning pull-right" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>
+    </div>
+      
+  </div>

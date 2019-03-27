@@ -1,0 +1,93 @@
+.superadmin
+{	
+	margin-top: 0px;
+	padding-left: 200px;
+	padding-right: 0px;
+}
+
+
+@media screen and (min-width:280px ) and (max-width:480px )
+{
+	.superadmin
+{	
+	margin-top: 0px;
+	padding-left: 100px;
+	padding-right: 0px;
+}
+
+}
+
+.panel{
+  margin:auto;
+  margin-top:100px;
+}
+
+i{
+  color:black;
+}
+
+.form-control,.form-control::placeholder{
+  color:black;
+}
+
+h5{
+  font:15px Consolas;
+  color: black;
+  line-height: 5px;
+}
+
+.form-control{
+  text-transform: none;
+}
+
+.btn{
+  padding-left:50px;
+  text-align:  center;
+  padding-right: 50px;
+
+}
+
+.adder
+{
+  padding: 12px 10px; 
+  border-radius: 20px;
+  outline:none;
+}
+
+#Add{
+  padding:12px 30px;
+}
+
+#fsubmit{
+  padding:12px 60px;
+  text-align:center;
+  border-radius: 12px;
+  outline:none;
+}
+
+.dabb{
+  padding: 0;
+}
+
+.strip{
+  font-size:12px;
+}
+
+#getuAdd{
+  font:17px Consolas; 
+  color:#f5ab35;
+}
+
+#calcLabel{
+  font:20px Consolas; 
+  color:#f5ab35; 
+  text-align:center; 
+  padding-left:20px;
+  padding-top:10px;
+}
+
+.calclabel{
+  padding:12px 60px;
+  text-align:center;
+  border-radius: 12px;
+}

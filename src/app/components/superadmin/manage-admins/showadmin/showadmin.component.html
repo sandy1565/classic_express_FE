@@ -1,0 +1,124 @@
+<div class="superadmin">
+  <div class="well">
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-search"></i></span> 
+          <input type="text" class="form-control" placeholder="By Id" [(ngModel)]="Ad_id" >
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-search"></i></span> 
+          <input type="text" class="form-control" placeholder="By Name" [(ngModel)]="Ad_name" >
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-search"></i></span> 
+          <input type="text" class="form-control" placeholder="By City" [(ngModel)]="Ad_loc" >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" style="margin-top:60px">
+    <table class="table table-hover table-bordered table-responsive">
+      <thead class="thead-inverse">
+        <tr>
+          <th>S.No</th>
+          <th>Admin Id</th>
+          <th>Admin Name</th>
+          <th>City</th>
+          <th>Country</th>
+          <th>Privileges</th>
+          <th>AdminStatus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of Ad_arr | adminPipe : Ad_id : Ad_name : Ad_loc ; let j=index">
+          <th scope="row">{{j+1}}</th>
+          <td>{{i.adminId}}</td>
+          <td>{{i.adminName}}</td>
+          <td>{{i.admincity}}</td>
+          <td>{{i.adminctry}}</td>
+          <td>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#adModal" (click)="Indexer(j)"><span class="glyphicon glyphicon-pencil" style="font-size: 15px; color:black"></span> Edit </button>  
+              
+              <div id="adModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Admin Modulator</h4>
+                    </div>
+                    <div class="modal-body" style="width:100%">
+                      <form>
+                        <p>Entry Number:- {{cur_index+1}}</p>
+                          <label>ID: </label><input type="text" class="form-control" name="adid" [(ngModel)]="Cur_Entry.adminId" disabled>
+                          <label>Name: </label><input type="text" class="form-control" name="adname" [(ngModel)]="Cur_Entry.adminName">
+                          <!--<label>New Password: </label><input type="password" minlength="6" maxlength="20" class="form-control" name="adpass" [(ngModel)]="Ad_newPass">-->
+                          <label>Country: </label>
+                            <select class="form-control" name="adctr" (change)="CtrChange($event.target.value)" [(ngModel)]="Cur_Entry.adminctry" ngModel>
+                              <option value="" selected>Country</option>
+                              <option *ngFor="let i of DDown" [value]="i.Country">{{i.Country}}</option>
+                            </select>
+                          <label>City: </label>
+                          <select [disabled]="Ccontrol" class="form-control" name="adct" [(ngModel)]="Cur_Entry.admincity" ngModel>
+                            <option value="" selected>City</option>
+                            <option *ngFor="let j of cities" [value]="j">{{j}}</option>
+                          </select>
+                        <hr>
+                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#fSub">Delete</button>
+                              
+                              <!-- Final Popup Begin -->
+                              <div id="fSub" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Are You Sure ?</h4>
+                                      </div>
+                                      <div class="modal-body" style="width:100%">
+                                        <button type="button" class="btn btn-danger" (click)="DeleteAdmin()" data-dismiss="modal">Proceed</button>
+                                        <button type="button" class="btn btn-warning" style="float:right" data-dismiss="modal">Cancel</button>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- FInal Popup Closed -->
+                            
+
+                          <button type="button" class="btn btn-warning" (click)="ReplaceAd()" style="float:right" data-dismiss="modal">Update</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </td>
+        <td>
+          <button *ngIf="i.active" class="btn btn-danger" data-toggle="modal" data-target="#state" (click)="Indexer(j)">Active</button>
+          <button *ngIf="!i.active" class="btn btn-info" data-toggle="modal" data-target="#state" (click)="Indexer(j)">In-Active</button>
+
+          <div id="state" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 *ngIf="i.active" class="modal-title">Do You Want To Disable Current Admin ?</h4>
+                        <h4 *ngIf="!i.active" class="modal-title">Do You Want To Enable Current Admin ?</h4>
+                  </div>
+                  <div class="modal-body" style="width:100%">
+                    <button type="button" class="btn btn-danger" (click)="AdminPermit()" data-dismiss="modal">Proceed</button>
+                    <button type="button" class="btn btn-warning" style="float:right" data-dismiss="modal">Cancel</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

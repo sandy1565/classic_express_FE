@@ -1,0 +1,77 @@
+.container-fluid{
+    background: url("../../../../assets/Images/0428.jpg") no-repeat top right;
+    background-size: cover;
+    padding-bottom: 150px;
+}
+
+.well{
+    margin:auto;
+    margin-top: 150px;
+    width:90%;
+    height:60%;
+    background-color: #1878cc;
+}
+
+.progress{
+    height:60px;
+}
+
+.progress-bar{
+    padding:auto;
+    padding-top:18px;
+    border-right:1px solid black;
+    font-family: Consolas;
+    font-weight: bold;
+    color:black;
+}
+
+h3,h4,h5{
+    color: #ffca28;
+}
+
+h4 i{
+    font-size: 25px;
+}
+i{color: black}
+
+.data{
+    color:whitesmoke;
+    font:bold 20px Garamond;
+    text-align: center;
+}
+
+.containerAbc
+{
+	overflow-y: auto;
+    padding: 35px 55px 0px 55px;
+  	background-image: url("../../../../assets/img/pattern/footer-top-bg.png");
+}
+
+
+@media only screen and (max-width : 991px) {
+  
+/**nav-expand for footer with head and ul**/
+.nav-folderized .nav h4 { cursor: pointer; }
+.nav-folderized ul { max-height: 0; overflow:hidden; transition: max-height 1s ease-out; }
+.nav-folderized .nav h4:after { content: "+"; float: right; }
+.nav-folderized .nav.open h4:after { content: "-"; }
+.nav-folderized .nav.open ul { height:auto; max-height: 500px; transition: max-height 1s ease-in !important; }
+/**nav-expand for footer with head and ul**/
+}
+
+.heady{
+    color:whitesmoke;
+    font:bold 20px Garamond;
+    padding-top:30px;
+}
+
+.items{
+	color:#f5ab35;
+    padding-top:10px;
+}
+
+.items i{
+	color:#1878cc;
+    font-size:35px;
+    padding-left:20px;
+}

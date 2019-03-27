@@ -1,0 +1,32 @@
+<div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">My Orders</div>
+            <div class="panel-body">
+                <table class="table table-bordered table-responsive">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Order Id</th>
+                            <th>Order Date</th>
+                            <th>Order Amount</th>
+                            <th>Status</th>
+                            <th>Track Id</th>
+                            <th>Report</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let i of u_Ords; let j= index">
+                            <td scope="row">{{j+1}}</td>
+                            <td>{{i.ordId}}</td>
+                            <td>{{i.ordDate}}</td>
+                            <td>Rs {{i.ordPrice}}</td>
+                            <td><button type="button" class="btn btn-info statbox">{{i.ordStatus}}</button></td>
+                            <td>{{i.ordTrackid}}</td>
+                            <td><button type="button" class="btn btn-warning" (click)="NaviRepo(i.ordId, i.ordTrackid)"><i class="fa-list-alt"></i> Full Report</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer text-right">Older Posts</div>
+        </div>
+    </div>

@@ -1,0 +1,28 @@
+<div class="admin">
+  <div class="well topper">
+    <h3 style="color:black">Proximity Users</h3>
+  </div>
+  <div class="container-fluid">
+        <table class="table table-hover table-bordered table-responsive">
+            <thead class="thead-inverse">
+                <tr>
+                  <th>S.No</th>
+                  <th>User Id</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of UsArr; let j=index">
+                    <td>{{j+1}}</td>
+                    <td>{{i.userId}}</td>
+                    <td>{{i.userFname}} {{i.userLname}}</td>
+                    <td>{{i.ustreet}}</td>
+                    <td>{{i.userMail}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,50 @@
+<div class="wrapper">
+    
+    <!-- Navbar -->
+    <nav *ngIf="superadminsidebar.superadminSidebarVisible" id="sidebar">
+        <div class="sidebar-header">
+            <h4 class="user">Super Admin</h4>
+        </div>
+        
+        <ul class="list-unstyled components">
+
+            <li>
+                <a [routerLink]="['master489912User_@postTrack']">Dashboard</a>
+            </li>
+
+            <li>
+                <a href="#homeSubmenu3a" data-toggle="collapse" aria-expanded="false">Admin Management</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu3a">
+                    <li><a [routerLink]="['master489912User_@postTrack','createadmin']">Add Admin</a></li>
+                    <li><a [routerLink]="['master489912User_@postTrack','showadmin']">Show Admins</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#homeSubmenu3b" data-toggle="collapse" aria-expanded="false">User Management</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu3b">
+                    <li><a [routerLink]="['master489912User_@postTrack','createuser']">Add User</a></li>
+                    <li><a [routerLink]="['master489912User_@postTrack','showuser']">Show Users</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#homeSubmenu3c" data-toggle="collapse" aria-expanded="false">Courier Management</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu3c">
+                    <li><a [routerLink]="['master489912User_@postTrack','addcourier']">Add Courier</a></li>
+                    <li><a [routerLink]="['master489912User_@postTrack','showcourier']">Show Couriers</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <a [routerLink]="['master489912User_@postTrack','payments']">Payments</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Content -->
+    <div class="contentA">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

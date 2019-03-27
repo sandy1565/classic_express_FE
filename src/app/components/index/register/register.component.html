@@ -1,0 +1,388 @@
+<div *ngIf="regDiv" class="panel panel-primary">
+  <div class="panel-heading">User Registration
+       <button type="button" class="close text-right" (click)="Closer()" style="width:fit-content; color:black">&times;</button>
+  </div>
+    <form #userForm="ngForm" (ngSubmit)="sGetUser(userForm.value)">
+    <div class="panel-body">
+        <div class="row text-center">
+          <div class="col-md-6">
+            <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  <input type="text" class="form-control has-success has-error has-feedback alpha_bet" placeholder="First Name *" required ngModel minlength="2" pattern="[a-zA-Z][a-zA-Z]+" title="Must contain only Alphabets" name="fname" maxlength="19"  #fn="ngModel">
+                  <span *ngIf="fn.dirty || fn.touched">
+                    <span *ngIf="fn.errors" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span *ngIf="!fn.errors" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+                  </span>
+                </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  <input type="text" class="form-control has-success has-error has-feedback alpha_bet" placeholder="Last Name *" required ngModel maxlength="19" minlength="2" pattern="[a-zA-Z][a-zA-Z]+" title="Must contain only Alphabets" name="lname" #ln="ngModel">
+                  <span *ngIf="ln.dirty || ln.touched">
+                    <span *ngIf="ln.errors" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span *ngIf="!ln.errors" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+                  </span>
+            </div>
+          </div>                    
+        </div>
+
+        <div class="row">
+        <div class="col-md-12">
+            <div class="input-group" id="genderbox" >
+                  <span class="input-group-addon"><i class="fa fa-female"></i> | <i class="fa fa-female"></i></span>
+                  <select class="form-control" required name="gender" ngModel>
+                    <option value="" selected>Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+              </div>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-home"></i></span>
+              <input type="text" placeholder="Street" class="form-control" name="street" maxlength="50" ngModel>
+            </div>	
+          </div>
+        
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-flag-checkered"></i></span>
+              <select class="form-control" name="country" (change)="CtrChange($event.target.value)" required ngModel>
+                <option value="" selected>Country *</option>
+                <option *ngFor="let i of DDown" [value]="i.Country">{{i.Country}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="input-group"><span class="input-group-addon"><i class="fa fa-building"></i></span>
+              <select [disabled]="Ccontrol" class="form-control" name="city" required ngModel>
+                <option value="" selected>Nearest City *</option>
+                <option *ngFor="let j of cities" [value]="j">{{j}}</option>
+              </select>
+            </div>	
+          </div>		
+        </div>
+
+        <div class="row text-center">  
+          <div class="col-md-6">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                  <input type="email" class="form-control has-success has-error has-feedback" placeholder="Email *" required name="email" minlength="6" maxlength="30" title="Eg:- abc123@domain.com" ngModel #mail="ngModel" email>
+                  <span *ngIf="mail.dirty || mail.touched">
+                    <span *ngIf="mail.errors" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span *ngIf="!mail.errors" class="glyphicon glyphicon-ok form-control-feedback"></span>                                 
+                  </span>
+              </div>
+          </div>
+          <div class="col-md-6 text-left">
+            <div class="input-group">
+                  <span class="input-group-addon" style="padding:0"><input type="number" class="form-control" style="width:5em" [(ngModel)]="Ccode" required name="mcc" min="1" max="999" ngModel disabled></span>
+                  <input type="text" class="form-control has-success has-error has-feedback moby" placeholder="Mobile *" required name="mob" pattern="[0-9]{10}" minlength="10" maxlength="10" title="A Valid 10 Digit Number" ngModel #mob="ngModel">
+                  <span *ngIf="mob.dirty || mob.touched">
+                    <span *ngIf="mob.errors" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span *ngIf="!mob.errors" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+                  </span>
+            </div>
+          </div>                    
+        </div>
+
+        <div class="row text-center">  
+          <div class="col-md-6">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                  <input id="passo1" type="password" class="form-control has-success has-error has-feedback passo" placeholder="PassWord **" required name="pass" maxlength="20" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Minimum 8 Characters long with at least One Uppercase, One Lowercase & One digit" ngModel #pass="ngModel" [(ngModel)]="password">
+                  <span *ngIf="pass.dirty || pass.touched">
+                    <span *ngIf="pass.errors" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span *ngIf="!pass.errors" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+                  </span>
+              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                  <input id="passo2" type="password" class="form-control has-success has-error has-feedback" placeholder="Confirm PassWord **" required name="cpass" title="Same as Password" ngModel #cpass="ngModel" [(ngModel)]="cpassword">
+                  <span *ngIf="cpass.dirty || cpass.touched">
+                    <span *ngIf="cpassword!=password || cpassword==empty" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <span *ngIf="cpassword==password && cpassword!=empty" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+                  </span>
+            </div>
+          </div>                    
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="row" style="border-bottom: 1px solid #ddd">
+          <div id="eyeball" class="col-md-12"><button type="button" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i><a style="cursor:pointer" (click)="ShoPass()"> Show Password</a></button></div><br><br>
+          <div class="col-md-5" style="color: #337ab7">* Fields are mandatory</div>
+          <div class="col-md-2"></div>
+          <div class="col-md-5" style="color: #337ab7; text-align:right;"><a style="cursor:pointer" (click)="LogMe()">Already Registered ?</a></div><br>
+          <div class="col-md-12" style="color: #337ab7">** Minimum 8 Characters long with at least 1 Uppercase, 1 Lowercase & 1 digit</div><br><br>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <button type="reset" class="btn btn-warning">Reset <i class="fa fa-refresh"></i></button>
+          </div>
+          <div class="col-md-6 text-right">
+            <button type="submit" class="btn btn-warning">Submit <i class="fa fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </form>
+</div>
+
+<div *ngIf="Tprog" class="well progo">
+  <div class="row"><h4>Your User Registration Number is {{Uid}}. Now, Proceed To Booking</h4></div>
+  <div class="row"><button type="button" class="btn btn-primary" (click)="Trackon()">Initiate A Booking</button></div> 
+</div>
+
+<!-- Track Panel !!! -->
+
+<div *ngIf="trackDiv" class="panel panel-primary" style="width:90%">
+    <form #trackForm="ngForm" (ngSubmit)="FormSub(trackForm.value)">        
+    <div class="panel-heading" style="background-color: #152a96; border-bottom:1px solid white">
+        <h3>Courier Booking
+          <button type="button" (click)="Closer()" class="close text-right" style="width:fit-content; color:black">&times;</button>
+        </h3>
+        <hr>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon">From: </span>
+              <select class="form-control trcont" name="fcountry" (change)="FromCtrChange($event.target.value)" [(ngModel)]="uAdd.fromcountry" required ngModel>
+                <option value="" selected>Country</option>
+                <option *ngFor="let i of DDown" [value]="i.Country">{{i.Country}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon">To: </span>
+              <select class="form-control trcont" name="tcountry" (change)="ToCtrChange($event.target.value)" required ngModel>
+                <option value="" selected>Country</option>
+                <option *ngFor="let i of DDown" [value]="i.Country">{{i.Country}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 text-center">
+            <button type="button" class="btn btn-warning adder" id="Add" (click)="Extns()">Add Items  <i class="fa fa-plus-square"></i></button>  
+          </div>
+          <div class="col-md-2 text-center">
+            <button type="button" class="btn btn-warning adder" (click)="Dxtns()">Remove Items  <i class="fa fa-minus-square"></i></button>  
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-md-2">
+            <select [disabled]="Cfcontrol" class="form-control trcont" name="fcity" required [(ngModel)]="uAdd.fromcity" ngModel>
+              <option value="" selected>City</option>
+              <option *ngFor="let j of fcities" [value]="j">{{j}}</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <input [disabled]="Cfcontrol" class="form-control trcont" type="text" placeholder="Street" maxlength="50" name="fstreet" [(ngModel)]="uAdd.fromstreet" required ngModel>
+          </div>
+          <div class="col-md-2">
+            <select [disabled]="Ctcontrol" class="form-control trcont" name="tcity" required ngModel>
+              <option value="" selected>City</option>
+              <option *ngFor="let j of tcities" [value]="j">{{j}}</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <input [disabled]="Ctcontrol" class="form-control trcont" type="text" placeholder="Street" maxlength="50" name="tstreet" required ngModel>
+          </div>
+          <div class="col-md-4 text-center checkbox">
+            <label id="getuAdd"><input type="checkbox" name="fstreet" (change)="AddChange($event.target.checked)">Select User Address</label>
+          </div>
+        </div>
+        <br>
+      </div>
+    <div *ngFor="let i of Arr; let j = index" class="panel-body" style="background-color: #0c63a6;border-bottom:1px solid white">
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                  <input type="text" placeholder="Quantity" maxlength="2" class="form-control strip numeri" name="qty" (change)="qtyChange($event.target.value,j)" required> 
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                  <input type="text" placeholder="Weight/Item" maxlength="4" class="form-control strip numeridot" name="wt" (change)="WtChange($event.target.value,j)" required>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                  <input type="text" placeholder="Price/Item" maxlength="6" class="form-control strip numeridot" name="ppi" (change)="prChange($event.target.value,j)" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group" (change)="dimChange(wid.value,het.value,len.value,j)">
+                  <input type="text" placeholder="Wd" class="form-control strip" name="wd" maxlength="5" #wid>
+                  <span class="input-group-addon dabb"><i class="fa fa-times"></i></span>
+                  <input type="text" placeholder="Ht" class="form-control strip" name="ht" maxlength="5" #het>
+                  <span class="input-group-addon dabb"><i class="fa fa-times"></i></span>
+                  <input type="text" placeholder="Ln" class="form-control strip" name="len" maxlength="5" #len>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                  <input type="text" placeholder="Type" class="form-control strip alpha_bet" name="typ" maxlength="20" (change)="typeChange($event.target.value,j)" required>
+              </div>
+            </div>  
+          </div>
+        </div>
+    <div *ngIf="trackFoot" class="panel-footer" style="background-color:#619af4">
+      <div class="container">
+            <h5 style="color: red">Quantity, Weight & Price are Mandatory for every group</h5>
+            <h5>Weight is in Kg</h5>
+            <h5>Price is in INR</h5>
+            <h5>Ht -> Height, Wd -> Width, Ln -> Length are in Cm</h5>
+          </div>
+          <hr>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+                <select class="form-control trcont" name="pref" (change)="PrefChange($event.target.value)">
+                  <option value="" selected>Delivery Preference</option>
+                  <option value="Standard">Standard</option>
+                  <option value="Express">Express</option>
+                  <option value="Custom">Custom</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">  
+                <div class="col-xs-6 text-center">
+                  <button type="button" class="btn btn-warning calclabel" (click)="Pconv()"><span *ngIf="CurCh"><i class="fa fa-inr" aria-hidden="true"></i> {{Tprice}}</span><span *ngIf="!CurCh"><i class="fa fa-usd" aria-hidden="true"></i> {{Tprice}}</span></button>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <button type="button" class="btn btn-default calclabel" disabled>{{Tweight}} Kgs</button>
+                </div>
+              </div>
+        </div>
+        <div class="col-md-3 text-center">
+          <button [disabled]="!trackForm.valid" type="submit" class="btn btn-success" id="fsubmit">Submit</button>
+        </div>
+      </div>    
+  </div>
+    </form>
+</div>
+
+<div *ngIf="Fprog" class="well progo">
+  <div class="row"><h4>Courier Successfully Booked. Your User Registration Number is {{Uid}}.</h4><br>
+    <h4>Login to your Dashboard To see Booking Details</h4>
+  </div>
+  <div class="row"><button type="button" class="btn btn-primary" (click)="RedLogin()">Login</button></div> 
+</div>
+
+<!-- Footer Panel  -->
+<div style="margin-top:50px">
+<footer class="containerAbc nav-folderized">
+    <div class="row">
+        <div class="col-md-2 ftr__list nav">
+           <h4 class="heady">About Us</h4>
+            <ul>
+               <hr>
+                <li class="items">Our Company</li>
+                <li class="items">Our Partners</li>
+                <li class="items">Terms & Conditions</li>
+                <li class="items">FAQs</li>
+            </ul>
+        </div>
+        <div class="col-md-2 ftr__list nav">
+          <h4 class="heady">Delivery Preference</h4>
+            <ul>
+                <hr>
+                <li class="items">Standard</li>
+                <li class="items">Express</li>
+                <li class="items">Custom</li>
+            </ul>
+        </div>
+        <div class="col-md-2 ftr__list nav">
+          <h4 class="heady">Coverage</h4>
+            <ul>
+                <hr>
+                <li class="items">Local</li>
+                <li class="items">National</li>
+                <li class="items">International</li>
+                <li class="items">Zap Delivery</li>
+            </ul>
+        </div>
+        <div class="col-md-2 ftr__list nav">
+          <h4 class="heady">Tools</h4>
+            <ul>
+                <hr>
+                <li class="items">Shipment Tracker</li>
+                <li class="items">My Account</li>
+                <li class="items">Volume Calculator</li>
+                <li class="items">PrePay</li>
+                <li class="items">Item Advice</li>
+            </ul>
+        </div>
+        <div class="col-md-4 ftr__list nav">
+          <h4 class="heady">Follow Us</h4>
+                <ul>
+                  <hr>
+                        <li class="items"><i class="fa fa-twitter"></i><i class="fa fa-twitch"></i><i class="fa fa-google-plus"></i><i class="fa fa-facebook-official"></i></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 ftr__list nav">
+                  <h4 class="heady">Partners</h4>
+
+                    <ul>
+                        <hr>
+                        <li class="items"><i class="fa fa-truck"></i><i class="fa fa-ship"></i><i class="fa fa-plane"></i></li>
+                    </ul>
+                </div>
+    </div>
+    <hr>
+    <div>
+        © posTrack.com Ltd 2017 All Rights Reserved. | Company Number: XXXXXXXXX
+    </div><br><br><br>
+</footer>
+</div>
+
+<!-- OTP MODAL START -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#otpModal" style="display:none" id="launchOtp">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="otpModal" tabindex="-1" role="dialog" aria-labelledby="otpModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="otpModalLabel">Verify Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2>Sent OTP to Phone No. XXXXXXXX45</h2>
+        <h3>Enter 4 Digit OTP To Verify account</h3>
+        <form class="otp" autocomplete="off" novalidate>
+            <fieldset>
+              <input maxlength="1" #fld1/>
+              <input maxlength="1" #fld2/>
+              <input maxlength="1" #fld3/>
+              <input maxlength="1" #fld4/>
+            </fieldset>
+            <div style="color:red" *ngIf="fld1.value == '' || fld2.value == '' || fld3.value == '' || fld4.value == ''">
+              Enter 4 Digit pin
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="submitOtp(fld1.value+fld2.value+fld3.value+fld4.value)">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- OTP MODAL END -->
+  

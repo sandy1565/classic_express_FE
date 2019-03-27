@@ -1,0 +1,80 @@
+<div class="superadmin">
+  <div *ngIf="!successFlag" class="well">
+    <button type="button" class="close text-right" (click)="Closer()" style="width:fit-content; color:black">&times;</button>
+    <h3 style="float:left">Admin Registration</h3><br><hr>
+    <form #adForm="ngForm" (ngSubmit)="AdminData(adForm.value)">
+      <div class="row">
+          <div class="col-xs-12 form-group">
+            <input type="text" class="form-control" placeholder="Enter Name" minlength="4" maxlength="35" required name="name" ngModel>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-xs-12 form-group">
+            <input id="passo1" type="password" class="form-control has-success has-error has-feedback" placeholder="Enter Password *" pattern="[a-zA-Z0-9]{6,}" minlength="6" maxlength="20" required name="pass" #pass="ngModel" [(ngModel)]="password" ngModel>
+            <span *ngIf="pass.dirty || pass.touched">
+                <span *ngIf="pass.errors" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                <span *ngIf="!pass.errors" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+            </span>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-xs-12 form-group">
+            <input id="passo2" type="password" class="form-control has-success has-error has-feedback" placeholder="Confirm PassWord *" required minlength="6" maxlength="20" name="cpass" title="Same as Password" ngModel #cpass="ngModel" [(ngModel)]="cpassword">
+              <span *ngIf="cpass.dirty || cpass.touched">
+                <span *ngIf="cpassword!=password || cpassword==empty" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                <span *ngIf="cpassword.length!=0 && cpassword==password" class="glyphicon glyphicon-ok form-control-feedback"></span>              
+              </span>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-xs-12 form-group">
+            <select class="form-control" name="country" (change)="CtrChange($event.target.value)" required ngModel>
+              <option value="" selected>Country</option>
+              <option *ngFor="let i of DDown" [value]="i.Country">{{i.Country}}</option>
+            </select>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-xs-12 form-group">
+            <select [disabled]="Ccontrol" class="form-control" name="city" required ngModel>
+              <option value="" selected>City</option>
+              <option *ngFor="let j of cities" [value]="j">{{j}}</option>
+            </select>
+          </div>
+      </div>
+        <hr>
+      <div class="row">
+        <div class="col-xs-8">
+            <h5>* Password must be at least 6 Chars (Alphabets Or Numbers)</h5>
+        </div>
+          <div class="col-xs-4 text-center">
+            <button type="button" (click)="ShoPass()" class="btn btn-info">Show Password</button>
+        </div>
+      </div>
+      <div class="row">
+        
+      </div>
+        <hr>
+      <div class="row">
+        <div class="col-xs-6">
+            <button type="reset" class="btn btn-warning">Reset</button>
+        </div>
+        <div class="col-xs-6">
+            <button type="submit" class="btn btn-warning">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="well" *ngIf="successFlag">
+    <div class="alert alert-success">You have Successfully Added Admin !!!</div><br>
+    <div class="row">
+      <div class="col-xs-6">
+        <button (click)="adList()" class="btn btn-success"><i class="fa fa-hand-o-right"></i> Go To Admin List</button>
+      </div>
+      <div class="col-xs-6">
+        <button (click)="Back()" class="btn btn-success"><i class="fa fa-hand-o-right"></i> Add Another Admin</button>
+      </div>
+    </div>      
+  </div>
+</div>

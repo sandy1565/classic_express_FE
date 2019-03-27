@@ -1,0 +1,157 @@
+<div class="superadmin">
+
+  <div *ngIf="Checker">
+    <div class="well text-center" style=" margin:auto;margin-top:100px; width:50%">
+      <input class="form-control" placeholder="Enter User ID" type="text" #id><br>
+          <button class="btn btn-warning" type="button" (click)="getId(id.value)">Id Check</button>
+        <div *ngIf="nFound">
+         <hr>
+          <div class="alert alert-danger">
+            User Not Found !!! Re-Enter Correct Id
+          </div>
+        </div>
+        <div *ngIf="ublock">
+          <hr>
+          <div class="alert alert-danger">
+            You Do Not Have Priveleges to Make Bookings for The User
+          </div>
+        </div>
+    </div>
+  </div>
+
+    <div *ngIf="trackDiv" class="panel panel-primary" style="width:90%">
+        <form #trackForm="ngForm" (ngSubmit)="FormSub(trackForm.value)">        
+        <div class="panel-heading" style="background-color: #152a96; border-bottom:1px solid white">
+            <h3>Courier Booking
+                <button type="button" (click)="Closer()" class="close text-right" style="width:fit-content; color:black">&times;</button>
+            </h3>
+            <hr>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">From: </span>
+                  <select class="form-control" name="fcountry" (change)="FromCtrChange($event.target.value)" [(ngModel)]="uAdd.fromcountry" required ngModel>
+                    <option value="" selected>Country</option>
+                    <option *ngFor="let i of DDown" [value]="i.Country">{{i.Country}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">To: </span>
+                  <select class="form-control" name="tcountry" (change)="ToCtrChange($event.target.value)" required ngModel>
+                    <option value="" selected>Country</option>
+                    <option *ngFor="let i of DDown" [value]="i.Country">{{i.Country}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-2 text-center">
+                <button type="button" class="btn btn-warning adder" id="Add" (click)="Extns()">Add Items  <i class="fa fa-plus-square"></i></button>  
+              </div>
+              <div class="col-md-2 text-center">
+                <button type="button" class="btn btn-warning adder" (click)="Dxtns()">Remove Items  <i class="fa fa-minus-square"></i></button>  
+              </div>
+            </div><br>
+            <div class="row">
+              <div class="col-md-2">
+                <select [disabled]="Cfcontrol" class="form-control" name="fcity" required [(ngModel)]="uAdd.fromcity" ngModel>
+                  <option value="" selected>City</option>
+                  <option *ngFor="let j of fcities" [value]="j">{{j}}</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <input [disabled]="Cfcontrol" class="form-control" type="text" placeholder="Street" maxlength="50" name="fstreet" [(ngModel)]="uAdd.fromstreet" required ngModel>
+              </div>
+              <div class="col-md-2">
+                <select [disabled]="Ctcontrol" class="form-control" name="tcity" required ngModel>
+                  <option value="" selected>City</option>
+                  <option *ngFor="let j of tcities" [value]="j">{{j}}</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <input [disabled]="Ctcontrol" class="form-control" type="text" placeholder="Street" maxlength="50" name="tstreet" required ngModel>
+              </div>
+              <div class="col-md-4 text-center checkbox">
+                <label id="getuAdd"><input type="checkbox" name="fstreet" (change)="AddChange($event.target.checked)">Select User Address</label>
+              </div>
+            </div>
+            <br>
+          </div>
+        <div *ngFor="let i of Arr; let j = index" class="panel-body" style="background-color: #0c63a6;border-bottom:1px solid white">
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                  <input type="text" placeholder="Quantity" maxlength="2" class="form-control strip numeri" name="qty" (change)="qtyChange($event.target.value,j)" required> 
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                  <input type="text" placeholder="Weight/Item" maxlength="4" class="form-control strip numeridot" name="wt" (change)="WtChange($event.target.value,j)" required>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                  <input type="text" placeholder="Price/Item" maxlength="6" class="form-control strip numeridot" name="ppi" (change)="prChange($event.target.value,j)" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group" (change)="dimChange(wid.value,het.value,len.value,j)">
+                  <input type="text" placeholder="Wd" class="form-control strip" name="wd" maxlength="5" #wid>
+                  <span class="input-group-addon dabb"><i class="fa fa-times"></i></span>
+                  <input type="text" placeholder="Ht" class="form-control strip" name="ht" maxlength="5" #het>
+                  <span class="input-group-addon dabb"><i class="fa fa-times"></i></span>
+                  <input type="text" placeholder="Ln" class="form-control strip" name="len" maxlength="5" #len>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                  <input type="text" placeholder="Type" class="form-control strip alpha_bet" name="typ" maxlength="20" (change)="typeChange($event.target.value,j)" required>              </div>
+            </div>  
+          </div>
+        </div>
+        <div *ngIf="trackFoot" class="panel-footer" style="background-color:#619af4">
+          <div class="container">
+            <h5 style="color: red">Quantity, Weight & Price are Mandatory for every group</h5>
+            <h5>Weight is in Kg</h5>
+            <h5>Price is in INR</h5>
+            <h5>Ht -> Height, Wd -> Width, Ln -> Length are in Cm</h5>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                    <select class="form-control" name="pref" (change)="PrefChange($event.target.value)">
+                      <option value="" selected>Delivery Preference</option>
+                      <option value="Standard">Standard</option>
+                      <option value="Express">Express</option>
+                      <option value="Custom">Custom</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">  
+                <div class="col-xs-6 text-center">
+                  <button type="button" class="btn btn-warning calclabel" (click)="Pconv()"><span *ngIf="CurCh"><i class="fa fa-inr" aria-hidden="true"></i> {{Tprice}}</span><span *ngIf="!CurCh"><i class="fa fa-usd" aria-hidden="true"></i> {{Tprice}}</span></button>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <button type="button" class="btn btn-default calclabel" disabled>{{Tweight}} Kgs</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <button [disabled]="!trackForm.valid" type="submit" class="btn btn-success" id="fsubmit" data-toggle="modal" data-target="#wait">Submit</button>
+            </div>
+            <div id="wait" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Please Wait</h4>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>    
+      </div>
+        </form>
+    </div>
+</div>

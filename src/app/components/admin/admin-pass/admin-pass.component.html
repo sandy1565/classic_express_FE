@@ -1,0 +1,58 @@
+<div class="admin">  
+  <div class="well">
+    <div class="row">
+        <form class="form-horizontal">
+            <fieldset>
+            <legend>Change Password</legend>
+            <br>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="id">Admin ID</label>  
+                <div class="col-md-6">
+                    <input name="id" type="text" placeholder="Admin Id" class="form-control" [(ngModel)]="Darr.adminId" disabled> 
+                </div>
+            </div>
+            <!-- Text input-->
+            
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cpass">Current Password</label>  
+                <div class="col-md-6">
+                    <input name="cpass" type="password" placeholder="Current Password" class="form-control"  minlength="4" maxlength="35" required [(ngModel)]="cur_pass"> 
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cpass">New Password</label>  
+                <div class="col-md-6">
+                    <input name="npass" id="npass" type="password" placeholder="New Password" class="form-control"  minlength="4" maxlength="35" required [(ngModel)]="new_pass"> 
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cpass">Confirm New Password</label>  
+                <div class="col-md-6">
+                    <input name="conpass" id="conpass" type="password" placeholder="Confirm Password" class="form-control"  minlength="4" maxlength="35" required [(ngModel)]="con_pass"> 
+                </div>
+            </div>
+            </fieldset>
+          <hr>
+            <div class="col-md-4">
+                    <button type="button" (click)="ShoPass()" class="btn btn-primary">Show Password</button> 
+            </div>
+            <div class="col-md-4">
+                    <!--<button type="reset" class="btn btn-warning">Reset</button>--> 
+            </div>
+            <div class="col-md-4">
+                    <button type="submit" (click)="Pchange()" class="btn btn-success">Change</button> 
+            </div>
+          </form>
+    </div>
+      <div class="row" style="margin-top:30px">
+        <div *ngIf="Checker" class="alert alert-danger">
+            Current Password Does Not Match
+        </div>
+        <div *ngIf="blocker" class="alert alert-danger">
+            New Password Mismatch
+        </div>  
+      </div>
+  </div>
+</div>

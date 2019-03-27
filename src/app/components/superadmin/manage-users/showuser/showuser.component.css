@@ -1,0 +1,49 @@
+.superadmin
+{	
+	margin-top: 0px;
+	padding-left: 200px;
+	padding-right: 0px;
+}
+
+
+@media screen and (min-width:280px ) and (max-width:480px )
+{
+	.superadmin
+{	
+	margin-top: 0px;
+	padding-left: 100px;
+	padding-right: 0px;
+}
+
+}
+
+.form-control{
+	text-transform:none; 
+	color:black;
+}
+
+.form-control::placeholder , i{
+	color:#f5ab35;
+}
+
+thead{
+    background-color: #f5ab35;
+    color:white;
+}
+
+thead tr th, tbody tr td{
+	text-align: center;
+}
+
+.modal{
+	text-align: left;
+}
+
+td{
+	color:black;
+}
+
+.badge{
+	background-color: #4fb735;
+	padding:5px 10px;
+}

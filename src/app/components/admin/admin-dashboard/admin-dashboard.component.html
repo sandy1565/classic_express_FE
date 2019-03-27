@@ -1,0 +1,111 @@
+<div class="superadmin">
+    <div class="container-fluid">
+        <nav class="navbar navbar-static-top mask-overlay" style="background-color: #f5ab35">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Welcome Admin</a>
+            </div>
+            <ul class="nav navbar-nav" style="float:right">
+                <li><a style="cursor:pointer; font-size:16px" (click)="Logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li> 
+            </ul>
+        </nav>
+    </div>
+    <br><br>
+    <div class="row well">
+        <form class="form-horizontal">
+            <fieldset>
+            <legend align="middle">Admin Profile</legend>
+            
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="id">Admin ID</label>  
+                <div class="col-md-8">
+                    <input name="id" type="text" placeholder="Admin Id" class="form-control input-md" [(ngModel)]="Darr.adminId" disabled> 
+                </div>
+            </div>
+            <!-- Text input-->
+            
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="fn">Name</label>  
+                <div class="col-md-8">
+                    <input name="fn" type="text" placeholder="Full Name" class="form-control input-md" [(ngModel)]="Darr.adminName" disabled> 
+                </div>
+            </div>
+            
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-2 control-label">Location </label>  
+                <div class="col-md-4">
+                <select class="form-control" name="country" (change)="CtrChange($event.target.value)" [(ngModel)]="Darr.adminctry" disabled>
+                    <option value="" selected>Country</option>
+                    <option *ngFor="let i of DDown" [value]="i.Country">{{i.Country}}</option>
+                    </select> 
+                </div>
+                <div class="col-md-4">
+                <select class="form-control" name="city" [(ngModel)]="Darr.admincity" disabled>
+                    <option value="" selected>City</option>
+                    <option *ngFor="let j of cities" [value]="j">{{j}}</option>
+                </select>
+                <!--<input type="text" class="form-control" name="cty" [(ngModel)]="Darr.admincity" disabled>-->
+                </div>
+            </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <!--<div class="row row1">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div style="display: block">
+                <canvas baseChart
+                    [data]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered1($event)"
+                    (chartClick)="chartClicked1($event)">
+                </canvas>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+
+            <div style="display: block">
+                <canvas baseChart
+                        [data]="pieChartData"
+                        [labels]="pieChartLabels"
+                        [chartType]="pieChartType"
+                        (chartHover)="chartHovered1($event)"
+                        (chartClick)="chartClicked1($event)">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row2">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div style="display: block">
+                <canvas baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [options]="barChartOptions"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)">
+                </canvas>
+            </div>
+                <button (click)="randomize()">Update</button>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div style="display: block">
+                <canvas baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [options]="barChartOptions"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)">
+                </canvas>
+            </div>
+                <button (click)="randomize()">Update</button>
+        </div>
+    </div>-->
+</div>   
+         

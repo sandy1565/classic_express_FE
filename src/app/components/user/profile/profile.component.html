@@ -1,0 +1,68 @@
+
+<div class="well">
+  <form class="form-horizontal">
+    <fieldset>
+      <legend align="middle">User Profile</legend>
+      
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="id">ID</label>  
+          <div class="col-md-8">
+            <input name="id" type="text" placeholder="User Id" class="form-control input-md" [(ngModel)]="Darr.userId" disabled> 
+        </div>
+      </div>
+      <!-- Text input-->
+      
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="fn">First name</label>  
+          <div class="col-md-8">
+            <input name="fn" type="text" placeholder="First Name" class="form-control input-md" [(ngModel)]="Darr.userFname" disabled> 
+          </div>
+      </div>
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="ln">Last name</label>  
+          <div class="col-md-8">
+            <input name="ln" type="text" placeholder="Last Name" class="form-control input-md" [(ngModel)]="Darr.userLname" disabled> 
+        </div>
+      </div>
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="email">Email</label>  
+          <div class="col-md-8">
+            <input name="email" type="text" placeholder="Email" class="form-control input-md" [(ngModel)]="Darr.userMail" disabled> 
+        </div>
+      </div>
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-2 control-label">Address </label>  
+          <div class="col-md-2">
+           <select class="form-control" name="country" (change)="CtrChange($event.target.value)" [(ngModel)]="Darr.ucountry" disabled>
+              <option value="" selected>Country</option>
+              <option *ngFor="let i of DDown" [value]="i.Country">{{i.Country}}</option>
+            </select> 
+          </div>
+          <div class="col-md-2">
+           <select class="form-control" name="city" [(ngModel)]="Darr.ucity" disabled>
+              <option value="" selected>City</option>
+              <option *ngFor="let j of cities" [value]="j">{{j}}</option>
+            </select>
+            <!--<input type="text" class="form-control" name="cty" [(ngModel)]="Darr.ucity" disabled>--> 
+          </div>
+          <div class="col-md-4">
+           <input name="street" type="text" placeholder="Street" class="form-control input-md" disabled [(ngModel)]="Darr.ustreet"> 
+          </div>
+      </div>
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="phone">Mobile</label>  
+          <div class="col-md-8">
+            <input name="phone" type="text" placeholder="Mobile" class="form-control input-md" disabled [(ngModel)]="Darr.userMob">  
+        </div>
+      </div>
+    
+    </fieldset>
+  </form>
+</div>

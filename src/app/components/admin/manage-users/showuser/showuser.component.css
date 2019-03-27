@@ -1,0 +1,30 @@
+.admin{	
+	margin-top: 0px;
+	padding-left: 200px;
+	padding-right: 0px;
+}
+
+
+@media screen and (min-width:280px ) and (max-width:480px )
+{
+	.admin
+{	
+	margin-top: 0px;
+	padding-left: 100px;
+	padding-right: 0px;
+}
+
+}
+
+.topper{
+    background-color: #f5ab35;
+}
+
+thead{
+    background-color: #e8de22;
+}
+
+th,td{
+    text-align: center;
+    color:black;
+}

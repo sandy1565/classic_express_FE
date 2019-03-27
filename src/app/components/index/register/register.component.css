@@ -1,0 +1,170 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.panel{
+  width:70%;
+  margin:auto;
+  margin-top:140px;
+  box-shadow: 5px 5px 5px #92aad1;
+}
+
+.row{
+  margin-top:8px;
+}
+
+i{
+  color:black;
+}
+
+.glyphicon-ok{
+  margin-top:5px;
+  color:green;
+}
+
+.glyphicon-remove{
+  margin-top: 5px;
+  color:red;
+}
+
+.form-control, .form-control::placeholder{
+  color:black;
+}
+
+.trcont, .trcont::placeholder{
+  color: black;
+}
+
+h5{
+  font:15px Consolas;
+  color: black;
+  line-height: 5px;
+}
+
+#genderbox{
+  margin:auto;
+  width:40%;
+}
+
+.form-control{
+  text-transform: none;
+}
+
+.btn{
+  padding-left:50px;
+  text-align:  center;
+  padding-right: 50px;
+}
+
+.progo{
+  text-align: center;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  width: 50%;
+  margin:auto;
+  margin-top:140px
+}
+
+.adder
+{
+  padding: 12px 10px; 
+  border-radius: 20px;
+  outline:none;
+}
+
+#Add{
+  padding:12px 30px;
+}
+
+#fsubmit{
+  padding:12px 60px;
+  text-align:center;
+  border-radius: 12px;
+  outline:none;
+}
+
+.dabb{
+  padding: 0;
+}
+
+.strip, .strip::placeholder{
+  font-size:12px;
+  color:black;
+}
+
+#getuAdd{
+  font:17px Consolas; 
+  color:#f5ab35;
+}
+
+#calcLabel{
+  font:20px Consolas; 
+  color:#f5ab35; 
+  text-align:center; 
+  padding-left:20px;
+  padding-top:10px;
+}
+
+.calclabel{
+  padding:12px 60px;
+  text-align:center;
+  border-radius: 12px;
+}
+
+
+.data{
+    color:whitesmoke;
+    font:bold 20px Garamond;
+    text-align: center;
+}
+
+.containerAbc
+{
+	overflow-y: auto;
+    padding: 35px 55px 0px 55px;
+  	background-image: url("../../../../assets/img/pattern/footer-top-bg.png");
+}
+
+
+@media only screen and (max-width : 991px) {
+  
+/**nav-expand for footer with head and ul**/
+.nav-folderized .nav h4 { cursor: pointer; }
+.nav-folderized ul { max-height: 0; overflow:hidden; transition: max-height 1s ease-out; }
+.nav-folderized .nav h4:after { content: "+"; float: right; }
+.nav-folderized .nav.open h4:after { content: "-"; }
+.nav-folderized .nav.open ul { height:auto; max-height: 500px; transition: max-height 1s ease-in !important; }
+/**nav-expand for footer with head and ul**/
+}
+
+.heady{
+    color:whitesmoke;
+    font:bold 20px Garamond;
+    padding-top:30px;
+}
+
+.items{
+	color:#f5ab35;
+    padding-top:10px;
+}
+
+.items i{
+	color:#1878cc;
+    font-size:35px;
+    padding-left:20px;
+}
+
+.otp input{
+  width:20px;
+}
+
+
+
+/* Active Page */
+/* .main-menu > li:hover > a {
+    color: #ED552C;
+} */
+
+/* OTP */
+

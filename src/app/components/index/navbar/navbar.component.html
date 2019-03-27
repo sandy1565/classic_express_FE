@@ -1,0 +1,55 @@
+<div class="wrapper">
+  <div class="container-fluid">
+    <div class="navbar navbar-inverse navbar-fixed-top" *ngIf="navbaruser.navbarVisible" role="navigation">
+      
+      <div class="top-bar font2-title1 white-clr">
+        <div class="theme-container container navbar-one">
+          <div class="row">
+            <div class="col-md-4 col-sm-6 fs-12">
+              <p class="contact-num">  
+                  <i class="fa fa-phone"></i> Call us now: <span class="theme-clr"> +91-9999-999-998 </span> 
+              </p>
+            </div>
+              <a [routerLink]="['uregister']">
+                <button class="btn btn-danger btn-sm pull-right">Sign-Up</button>
+              </a>
+
+              <a [routerLink]="['login']">
+                <button class="btn btn-primary btn-sm pull-right">Sign-In</button>
+              </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-header">
+        <div class="navbar-header">
+          <img class="logo" alt="" src="./assets/img/logo/logo.png" />
+        </div>
+          <button type="button" id="closer" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      </div>
+
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav pull-left">
+          <li><a [routerLink]="['']">Home</a></li>
+          <li><a [routerLink]="['about-us']">About Us</a></li>
+          <li><a [routerLink]="['contact-us']">Contact Us</a></li>
+          <li><a [routerLink]="['faq']">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+
+  <!-- Router Content -->
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+
+      
+

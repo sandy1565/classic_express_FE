@@ -1,0 +1,32 @@
+<div class="wrapper">
+    <nav *ngIf="adminsidebar.adminSidebarVisible" id="sidebar">
+        <div class="sidebar-header">
+            <h4 class="user">Admin</h4>
+        </div>
+        <ul class="list-unstyled components">
+            <li>
+                <a [routerLink]="['admin']">Dashboard</a>
+            </li>
+            <li>
+                <a href="#homeSubmenu3b" data-toggle="collapse" aria-expanded="false">User Management</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu3b">
+                    <li><a [routerLink]="['admin','createuser']">Add User</a></li>
+                    <li><a [routerLink]="['admin','showuser']">Show Users</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#homeSubmenu3c" data-toggle="collapse" aria-expanded="false">Courier Management</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu3c">
+                    <li><a [routerLink]="['admin','addcourier']">Add Courier</a></li>
+                    <li><a [routerLink]="['admin','showcourier']">Courier Status</a></li>
+                </ul>
+            </li>
+            <li>
+                <a [routerLink]="['admin','changePass']">Change Password</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="contentA">
+        <router-outlet></router-outlet>
+    </div>
+</div>

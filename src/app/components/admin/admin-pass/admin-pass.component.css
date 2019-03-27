@@ -1,0 +1,38 @@
+.admin{	
+	margin-top: 0px;
+	padding-left: 200px;
+	padding-right: 0px;
+}
+
+
+@media screen and (min-width:280px ) and (max-width:480px )
+{
+	.admin
+{	
+	margin-top: 0px;
+	padding-left: 100px;
+	padding-right: 0px;
+}
+
+}
+
+.well{
+    width:50%;
+    background-color: transparent;
+    margin:auto;
+    margin-top:120px;
+}
+
+label{
+    margin-top:6px;
+    color:black;
+}
+
+.form-control{
+    text-transform: none;
+    color: black;
+}
+
+button{
+    width:10em;    
+}

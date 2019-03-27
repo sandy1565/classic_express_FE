@@ -1,0 +1,127 @@
+<div class="superadmin">
+  <div class="well">
+      <div class="row">
+        <div class="col-xs-4 text-center">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span> 
+            <input type="text" class="form-control" placeholder="By Id" [(ngModel)]="U_id" >
+          </div>
+        </div>
+        <div class="col-xs-4 text-center">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span> 
+            <input type="text" class="form-control" placeholder="By Name" [(ngModel)]="U_name" >
+          </div>
+        </div>
+        <div class="col-xs-4 text-center">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span> 
+            <input type="text" class="form-control" placeholder="By Email" [(ngModel)]="U_mail" >
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="container-fluid" style="margin-top:60px">
+    <table class="table table-hover table-bordered table-responsive">
+      <thead class="thead-inverse">
+        <tr>
+          <th>S.No</th>
+          <th>User Id</th>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Priveleges</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of U_arr | userPipe : U_id : U_name : U_mail; let j=index">
+          <td>{{j+1}}</td>
+          <td>{{i.userId}}</td>
+          <td>{{i.userFname}} {{i.userLname}}</td>
+          <td>{{i.userGender}}</td>
+          <td>{{i.userMail}}</td>
+          <td>{{i.userMob}}</td>
+          <td class="mods">
+              <button class="btn btn-primary" data-toggle="modal" data-target="#usModal" (click)="usIndexer(j)"><span class="glyphicon glyphicon-pencil" style="font-size: 15px; color:black"></span> Edit</button>
+              <div id="usModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">User Modulator</h4>
+                    </div>
+                    <div class="modal-body" style="width:100%">
+                      <form>
+                        <p>Entry Number:- {{cur_index+1}}</p>
+                          <label>ID: <input type="text" class="form-control" name="uid" [(ngModel)]="Cur_Entry.userId" disabled></label>
+                          <label>First Name: <input type="text" class="form-control" name="usfname" [(ngModel)]="Cur_Entry.userFname"></label>
+                          <label>Last Name: <input type="text" class="form-control" name="uslname" [(ngModel)]="Cur_Entry.userLname"></label>
+                          <label>Street: <input type="text" class="form-control" name="street" [(ngModel)]="Cur_Entry.ustreet"></label>
+                          <label>Country: </label>
+                            <select class="form-control" name="usctr" (change)="CtrChange($event.target.value)" [(ngModel)]="Cur_Entry.ucountry" ngModel>
+                              <option value="" selected>Country</option>
+                              <option *ngFor="let i of DDown" [value]="i.Country">{{i.Country}}</option>
+                            </select>
+                          <label>City: </label>
+                          <select [disabled]="Ccontrol" class="form-control" name="uscit" [(ngModel)]="Cur_Entry.ucity" ngModel>
+                            <option value="" selected>City</option>
+                            <option *ngFor="let j of cities" [value]="j">{{j}}</option>
+                          </select>
+                          <label>Mobile: <input type="number" class="form-control" name="umob" [(ngModel)]="Cur_Entry.userMob"></label>
+                          <label>Email: <input type="text" class="form-control" name="umail" [(ngModel)]="Cur_Entry.userMail"></label>
+                        <hr>
+                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#fSub">Delete</button>
+                              
+                              <!-- Final Popup Begin -->
+                              <div id="fSub" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Are You Sure ?</h4>
+                                      </div>
+                                      <div class="modal-body" style="width:100%">
+                                        <button type="button" class="btn btn-danger" (click)="DeleteUser()" data-dismiss="modal">Proceed</button>
+                                        <button type="button" class="btn btn-warning" style="float:right" data-dismiss="modal">Cancel</button>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            <button type="button" class="btn btn-warning" (click)="ReplaceUs()" style="float:right" data-dismiss="modal">Update</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </td>
+          <td class="mods">
+          <button *ngIf="i.ustat" class="btn btn-danger" data-toggle="modal" data-target="#state" (click)="usIndexer(j)">Active</button>
+          <button *ngIf="!i.ustat" class="btn btn-info" data-toggle="modal" data-target="#state" (click)="usIndexer(j)">In-Active</button>
+          <div id="state" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 *ngIf="i.ustat" class="modal-title">Do You Want To Disable Current User ?</h4>
+                        <h4 *ngIf="!i.ustat" class="modal-title">Do You Want To Enable Current User ?</h4>
+                  </div>
+                  <div class="modal-body" style="width:100%">
+                    <button type="button" class="btn btn-danger" (click)="userPermit()" data-dismiss="modal">Proceed</button>
+                    <button type="button" class="btn btn-warning" style="float:right" data-dismiss="modal">Cancel</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!--
+  
+-->

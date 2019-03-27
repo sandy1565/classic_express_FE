@@ -1,0 +1,80 @@
+<div class="superadmin">
+
+  <div class="well">
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>  
+            <input type="text" class="form-control" placeholder="Order Id" [(ngModel)]="Cid" >
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="User Id" [(ngModel)]="id" >
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="From" [(ngModel)]="from" >
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="To" [(ngModel)]="to" >
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Book Date" [(ngModel)]="bdate" >
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <select class="form-control" name="mMode" [(ngModel)]="moder">
+              <option value="">Mode</option>
+              <option value="Air">Air</option>
+              <option value="Cycle">Ship</option>
+              <option value="Cargo">Cargo</option>
+            </select>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="container-fluid" style="margin-top:60px">
+  <table class="table table-hover table-bordered table-responsive">
+    <thead class="thead-inverse">
+    <tr>
+      <th>S.No</th>
+      <th>Order Id</th>
+      <th>User Id</th>
+      <th>From</th>
+      <th>To</th>
+      <th><i class="fa fa-calendar" aria-hidden="true"></i> Order Date</th>
+      <th><i class="fa fa-truck" aria-hidden="true"></i> Mode</th>
+      <th><i class="fa fa-twitch" aria-hidden="true"></i> Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of Ord | bookingPipe : Cid : id : from : to : bdate : moder ; let j=index">
+      <td>{{j+1}}</td>
+      <td>{{i.conId}}</td>
+      <td>{{i.userId}}</td>
+      <td>{{i.fromStreet}}, {{i.fromCity}}, {{i.fromCountry}}</td>
+      <td>{{i.toStreet}}, {{i.toCity}}, {{i.toCountry}}</td>
+      <td>{{i.bDate}}</td>
+      <td>{{i.mode}}</td>
+      <td><button class="btn btn-info" disabled> {{i.status}}</button></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+<!--
+  
+  -->

@@ -1,0 +1,37 @@
+.well{
+    margin:auto;
+    width:90%;
+    height:60%;
+    background-color: #1878cc;
+}
+
+h3,h4,h5{
+    color: #ffca28;
+}
+
+h4 i{
+    font-size: 25px;
+}
+i{color: black}
+
+.details{
+    margin-left:50px;
+}
+
+label{
+    font:bold 17px Consolas;
+    color:black;
+}
+
+.progress{
+    height:60px;
+}
+
+.progress-bar{
+    padding:auto;
+    padding-top:18px;
+    border-right:1px solid black;
+    font-family: Consolas;
+    font-weight: bold;
+    color:black;
+}
