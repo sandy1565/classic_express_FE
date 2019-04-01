@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http , Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import {User_class} from '../Blueprints/uSer';
 import { environment } from '../../environments/environment';
+import { Roles } from './commonModel';
 
 const url_head = environment.url_head;
 
@@ -22,7 +24,7 @@ export class DataUserService
     private user_otp_url='api/OTP_generate/';
     private User_passo_url='api/chUserPass/';
 
-    constructor(private _http:Http){}
+    constructor(private _http:Http, private http: HttpClient){}
 
     getUvals(): Observable<any[]>{
       return (this._http.get(url_head+this.get_users_Url)
@@ -94,4 +96,26 @@ export class DataUserService
         console.error(error);
         return Observable.throw(error.json().error());
     }
+
+    public addUserDetails(userData) {
+        // const user = {user:userData};
+        return this.http.post(`${url_head}user`, userData);  
+      }
+
+    public getRoles(){
+        return this.http.get(`${url_head}roles`)
+    };
+    
+    public getCountryDetails() {
+        return this.http.get(`${url_head}countries`);
+    }
+
+    public getStateDetails() {
+        return this.http.get(`${url_head}states`)
+    }
+
+    public getCitiesDetails() {
+        return this.http.get(`${url_head}cities`)
+    }
+        
 }

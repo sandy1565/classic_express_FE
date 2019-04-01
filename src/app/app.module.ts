@@ -1,3 +1,4 @@
+import {HttpClientModule} from "@angular/common/http";
 /* Core Components  */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -7,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
+
 
 
 /*  SERVICES  */
@@ -72,12 +74,15 @@ import { CbookingComponent } from './components/user/cbooking/cbooking.component
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { PasschangeComponent } from './components/user/passchange/passchange.component';
 import { TrackreportComponent } from './components/user/trackreport/trackreport.component';
+import { CommonService } from './services/commonService';
+import { MasterDetailsComponent } from './components/superadmin/master-details/master-details.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
     declarations: 
         [           AppComponent,
                 //Pipes
-                    AdminPipe, UserPipe, BookPipe, PymentPipe,
+                    AdminPipe, UserPipe, BookPipe, PymentPipe,SearchPipe,
                 //Index
                     HomeComponent,
                     AboutUsComponent,
@@ -108,6 +113,7 @@ import { TrackreportComponent } from './components/user/trackreport/trackreport.
                     SuperadminShowcourierComponent,
                     SuperadminShowpaymentComponent,
                     SidebarSuperadminComponent,
+                    MasterDetailsComponent,
 
                 //User
                     UserDashboardComponent, 
@@ -119,14 +125,15 @@ import { TrackreportComponent } from './components/user/trackreport/trackreport.
         ],
   
     imports: 
-        [BrowserModule,HttpModule,routing,RouterModule,ChartsModule,FormsModule],
+        [BrowserModule,HttpModule,routing,RouterModule,ChartsModule,FormsModule,HttpClientModule],
 
     /* Global Services */
     providers:
         [
             NavbarUserService,SidebarAdminService,SidebarSuperadminService,
             DataAdminService,DataCourierService, DataUserService,
-            LogService, userDashboard, LocalAssets, AuthGuard
+            LogService, userDashboard, LocalAssets, AuthGuard,
+            CommonService
         ],
     
     bootstrap: [AppComponent]

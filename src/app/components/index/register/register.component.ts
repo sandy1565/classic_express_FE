@@ -8,6 +8,7 @@ import { Bookings, Item_groups } from '../../../Blueprints/Order';
 import { Router } from '@angular/router';
 import { User_class } from '../../../Blueprints/uSer';
 import { LocalAssets } from '../../../services/LocalDataService';
+import { Country } from 'app/Blueprints/commonModal';
 
 declare var $: any;
 
@@ -35,6 +36,7 @@ export class RegisterComponent implements OnInit {
         fromcity:"",
         fromstreet:""
         };
+  Roles = [];
   DDown=[];
   fcities=[];
   tcities=[];
@@ -47,11 +49,19 @@ export class RegisterComponent implements OnInit {
   bmode="";
   CurCh=true;
   Ccontrol=true;
-  cities=[];
+  states = [];
+  cities= [];
   empty="";
   password="";
   cpassword="";
   Ccode=0;
+  PhNum;
+  selectedCountry;
+  selectedCity;
+  selectedState;
+  selectedStateName;
+  countries:any = [];
+  countryList:any = [];
 
  constructor(private navbaruser:NavbarUserService,private superadminsidebar:SidebarSuperadminService,private adminsidebar: SidebarAdminService, private rt:Router,private svc:DataCourierService, private lvc:LocalAssets, private usvc:DataUserService){
    this.trackDiv=false;
@@ -61,6 +71,7 @@ export class RegisterComponent implements OnInit {
    this.superadminsidebar.hide();
    this.adminsidebar.hide();
    lvc.getCountryDDowns().subscribe( t => {this.DDown = t} );
+  //  console.log(this.DDown);
    this.Arr.push(new Item_groups("",1,0,0,""));
  }
 
@@ -69,7 +80,30 @@ export class RegisterComponent implements OnInit {
 	    $(this).parent(".nav").toggleClass("open"); 
 	    $('html, body').animate({ scrollTop: $(this).offset().top - 170 }, 1500 );
     });
-    
+
+    this.usvc.getRoles().subscribe((resp:any) =>{
+      console.log(resp.roles);
+      this.Roles = resp.roles;
+      console.log(this.Roles);
+    });
+
+    this.countries = localStorage.getItem('countryList')
+    // console.log(this.usvc.getCountryDetails().subscribe(res=>this.countryList=res));
+    //  this.countryList);
+
+    this.usvc.getCountryDetails().subscribe(countryList => {
+      localStorage.setItem('countryDetails', JSON.stringify(countryList));
+    });
+
+    console.log(localStorage.getItem('countryDetails'));
+
+    this.usvc.getStateDetails().subscribe(statesList => {
+      localStorage.setItem('stateDetail', JSON.stringify(statesList));
+    });
+
+    this.usvc.getCitiesDetails().subscribe(cityList => {
+      localStorage.setItem('cityDetails', JSON.stringify(cityList));
+    });
   }
 
   ngAfterViewInit(){
@@ -99,12 +133,54 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  submitOtp(otp){
-    if(otp.length != 4){
-      return;
-    }
-    console.log(otp);
+  onSelectCountry(country_id: number) {
+    // console.log();
+    this.selectedCountry = country_id;
+    this.states = this.getStates().filter(item => {
+      return item.country_id === Number(country_id);
+    });
+    this.cities = [];
   }
+
+   onSelectState(state_id: number) {
+    this.selectedState = state_id;
+    this.selectedStateName = this.selectedState;
+    this.cities = this.getCity().filter(item => {
+      return item.state_id === Number(state_id);
+    });
+    this.cities = [];
+  }
+
+  onSelectCity(city_id: number) {
+    this.selectedCity = city_id;
+  }
+
+    getCountries() {
+      return JSON.parse(localStorage.getItem('countryDetails'));
+    }
+  
+    getStates() {
+      console.log('get states ==========================');
+      return JSON.parse(localStorage.getItem('stateDetail'));
+    }
+  
+    getDistrict() {
+      return JSON.parse(localStorage.getItem('districtDetails'));
+    }
+  
+    getCity() {
+      console.log('=================== getCity()');
+      return JSON.parse(localStorage.getItem('cityDetails'));
+    }
+
+    
+
+  // submitOtp(otp){
+  //   if(otp.length != 4){
+  //     return;
+  //   }
+  //   console.log(otp);
+  // }
 
   Direct(){
     //console.log("Opening Track Panel ");
@@ -276,24 +352,38 @@ ToCtrChange(s){
   }
 }
 
-  sGetUser(t){
-    this.userObj = new User_class(t.fname, t.lname, t.pass, t.gender, parseInt(t.mcc), parseInt(t.mob),t.email,t.street,t.city,t.country,true);
-    //console.log(this.userObj);
-    this.usvc.GetMaxUser().subscribe( t => {
-      this.Uid = parseInt(t.text())+1
-      $("#launchOtp").click();
-      // this.regDiv=false;
-      // this.Tprog=true;
-    },e=>{
-      $("#launchOtp").click();
-      // this.regDiv=false;
-      // this.Tprog=true;
+onSubmit(data) {
+    this.usvc.addUserDetails(data).subscribe(data => {
+      console.log('data added', data);
+      alert('abc');
+      console.log('added successfully');
+    },(err:any)=>{
+      alert( err);
     });
-    this.CrAdd.fromcountry = t.country;
-    this.CrAdd.fromcity = t.city;
-    this.CrAdd.fromstreet = t.street;
-
   }
+  // }
+// }
+
+
+  // sGetUser(t){
+  //   alert("test")
+  //   this.userObj = new User_class(t.fname, t.lname, t.pass, t.gender, parseInt(t.mcc), parseInt(t.mob),t.email,t.street,t.city,t.country,true);
+  //   //console.log(this.userObj);
+  //   this.usvc.GetMaxUser().subscribe( t => {
+  //     this.Uid = parseInt(t.text())+1
+  //     // $("#launchOtp").click();
+  //     // this.regDiv=false;
+  //     // this.Tprog=true;
+  //   },e=>{
+  //     // $("#launchOtp").click();
+  //     // this.regDiv=false;
+  //     // this.Tprog=true;
+  //   });
+  //   this.CrAdd.fromcountry = t.country;
+  //   this.CrAdd.fromcity = t.city;
+  //   this.CrAdd.fromstreet = t.street;
+
+  // }
 
   Trackon(){
     this.Tprog=false;

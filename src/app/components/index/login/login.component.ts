@@ -19,7 +19,7 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
   ROLES_DDL = Object.keys(ROLES);
-  ROLES = ROLES;
+  ROLES = {...ROLES};
   usObj:UserLogin;
   adObj:AdminLogin;
   trials=3;
@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
   }
 
   LoginSub(s){
+    console.log("hiiii")
     if(this.trials==0){
       alert("You Ran Out Of Tries !!"); 
       this.rt.navigate(['']);
@@ -104,7 +105,7 @@ export class LoginComponent implements OnInit {
             this.Checker=true;
           }
         });
-      }else {
+      }else if(s.role==ROLES.USER) {
       // if( ( (<string>s.id_name).charAt(0)>='a' && (<string>s.id_name).charAt(0)<'z' ) || ((<string>s.id_name).charAt(0)>='A' && (<string>s.id_name).charAt(0)<='Z')){
             this.usObj = new UserLogin(0, s.pass, s.id_name);
             //console.log(this.usObj);
@@ -129,12 +130,36 @@ export class LoginComponent implements OnInit {
 
             );
           }
-          // else{
-          //   this.trials--;
-          //   this.adChecker=false;
-          //   this.usChecker=false;
-          //   this.Checker=true;
-          // }
+          else{
+            this.usObj = new UserLogin(0, s.pass, s.id_name);
+            //console.log(this.usObj);
+            this.svc.userMailCheck(this.usObj).subscribe( t =>
+              {
+                if(parseInt(t.text())!=0 && t.text()!="Nfound"){
+                  localStorage.setItem('user',JSON.stringify(parseInt(t.text())));
+
+                  this.Usvc.GetUserById(parseInt(t.text())).subscribe( t =>
+                    {
+                      if(t.ustat){
+                        userDashboard.userid = parseInt(localStorage.getItem('user')); 
+                        this.rt.navigate(['user']);
+                      }
+                      else{
+                        this.blocker=true;
+                      }
+                    }
+                  );
+                }
+              }
+
+            );
+
+
+            // this.trials--;
+            // this.adChecker=false;
+            // this.usChecker=false;
+            // this.Checker=true;
+          }
         }
 
         Closer(){

@@ -2,9 +2,24 @@
   <div class="panel-heading">User Registration
        <button type="button" class="close text-right" (click)="Closer()" style="width:fit-content; color:black">&times;</button>
   </div>
-    <form #userForm="ngForm" (ngSubmit)="sGetUser(userForm.value)">
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
     <div class="panel-body">
         <div class="row text-center">
+          
+          <!-- User Roles -->
+          <div class="row">
+              <div class="col-md-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-flag-checkered"></i></span>
+                  <select class="form-control" name="role" (change)="CtrChange($event.target.value)" required ngModel>
+                    <option value="" selected>Roles *</option>
+                    <option *ngFor="let i of Roles" [value]="i.roleName">{{i.roleName}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          <!-- first name -->
           <div class="col-md-6">
             <div class="input-group">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -15,6 +30,8 @@
                   </span>
                 </div>
           </div>
+
+          <!-- lastname -->
           <div class="col-md-6">
             <div class="input-group">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -27,6 +44,7 @@
           </div>                    
         </div>
 
+        <!-- Gender -->
         <div class="row">
         <div class="col-md-12">
             <div class="input-group" id="genderbox" >
@@ -40,34 +58,50 @@
         </div>
         </div>
 
+        <!-- country-->
         <div class="row">
-          <div class="col-md-4">
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-home"></i></span>
-              <input type="text" placeholder="Street" class="form-control" name="street" maxlength="50" ngModel>
-            </div>	
-          </div>
-        
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-flag-checkered"></i></span>
-              <select class="form-control" name="country" (change)="CtrChange($event.target.value)" required ngModel>
+              <select class="form-control" name="countryId" (change)="onSelectCountry($event.target.value)" required ngModel>
+                  <!-- (change)="CtrChange($event.target.value)" -->
                 <option value="" selected>Country *</option>
-                <option *ngFor="let i of DDown" [value]="i.Country">{{i.Country}}</option>
+                <option *ngFor="let country of countries" value="{{ country.countryId }}">{{ country.countryName }}</option>
               </select>
             </div>
           </div>
 
-          <div class="col-md-4">
+           <!-- street -->
+           <div class="col-md-6">
+              <div class="input-group"><span class="input-group-addon"><i class="fa fa-building"></i></span>
+                <select [disabled]="Ccontrol" class="form-control" name="city" required ngModel>
+                  <option value="" selected>Nearest State *</option>
+                  <option *ngFor="let s of cities" [value]="j">{{s}}</option>
+                </select>
+              </div>	
+            </div>	
+        </div>
+          <!-- city -->
+          <div class="row">
+          <div class="col-md-6">
             <div class="input-group"><span class="input-group-addon"><i class="fa fa-building"></i></span>
               <select [disabled]="Ccontrol" class="form-control" name="city" required ngModel>
                 <option value="" selected>Nearest City *</option>
                 <option *ngFor="let j of cities" [value]="j">{{j}}</option>
               </select>
             </div>	
-          </div>		
-        </div>
-
+          </div>	
+          
+            <!-- Street -->
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                <input type="text" placeholder="Street" class="form-control" name="street" maxlength="50" ngModel>
+              </div>	
+            </div>
+          </div>
+        
+        <!-- Email Address -->  
         <div class="row text-center">  
           <div class="col-md-6">
               <div class="input-group">
@@ -79,10 +113,13 @@
                   </span>
               </div>
           </div>
+
+          <!-- Phone number -->
           <div class="col-md-6 text-left">
             <div class="input-group">
-                  <span class="input-group-addon" style="padding:0"><input type="number" class="form-control" style="width:5em" [(ngModel)]="Ccode" required name="mcc" min="1" max="999" ngModel disabled></span>
-                  <input type="text" class="form-control has-success has-error has-feedback moby" placeholder="Mobile *" required name="mob" pattern="[0-9]{10}" minlength="10" maxlength="10" title="A Valid 10 Digit Number" ngModel #mob="ngModel">
+                  <span class="input-group-addon" style="padding:0">
+                  <input type="number" class="form-control" style="width:5em" [(ngModel)]="Ccode" required name="mcc" min="1" max="999" ngModel disabled></span>
+                  <input type="text" class="form-control has-success has-error has-feedback moby" [(ngModel)]="PhNum" placeholder="Mobile *" required name="mob" pattern="[0-9]{10}" minlength="10" maxlength="10" title="A Valid 10 Digit Number" ngModel #mob="ngModel">
                   <span *ngIf="mob.dirty || mob.touched">
                     <span *ngIf="mob.errors" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     <span *ngIf="!mob.errors" class="glyphicon glyphicon-ok form-control-feedback"></span>              
@@ -91,6 +128,7 @@
           </div>                    
         </div>
 
+        <!-- Password -->
         <div class="row text-center">  
           <div class="col-md-6">
               <div class="input-group">
@@ -102,6 +140,8 @@
                   </span>
               </div>
           </div>
+
+          <!-- Confirm password -->
           <div class="col-md-6">
             <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-lock"></i></span>
@@ -361,7 +401,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <h2>Sent OTP to Phone No. XXXXXXXX45</h2>
+        <h2>Sent OTP to Phone No. {{PhNum}}</h2>
         <h3>Enter 4 Digit OTP To Verify account</h3>
         <form class="otp" autocomplete="off" novalidate>
             <fieldset>

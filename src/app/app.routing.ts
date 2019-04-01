@@ -43,6 +43,7 @@ import { CbookingComponent } from './components/user/cbooking/cbooking.component
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { PasschangeComponent } from './components/user/passchange/passchange.component';
 import { TrackreportComponent } from './components/user/trackreport/trackreport.component';
+import { MasterDetailsComponent } from "./components/superadmin/master-details/master-details.component";
 
 const APP_ROUTES:Routes=
 [
@@ -106,6 +107,9 @@ const APP_ROUTES:Routes=
             },
             {
                 path:'addcourier',component:SuperadminAddcourierComponent,
+            },
+            {
+                path:'address-master',component:MasterDetailsComponent
             },
             {
                 path:'showcourier',component:SuperadminShowcourierComponent,
