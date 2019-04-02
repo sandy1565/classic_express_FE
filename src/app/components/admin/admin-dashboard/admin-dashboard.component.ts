@@ -44,6 +44,7 @@ Ccontrol=true;
 ngOnInit() 
 {
   adminDashboard.adminId =  parseInt(localStorage.getItem('admin'));
+  console.log('------------------------------------------', adminDashboard.adminId)
   this.Csvc.getCountryDDowns().subscribe( t => {this.DDown = t} );
   this.adSvc.GetAdminById(adminDashboard.adminId).subscribe( t => {this.Darr = t; this.CtrChange(this.Darr.adminctry)} );
 }

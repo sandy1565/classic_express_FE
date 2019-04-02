@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 
 import { UserLogin, AdminLogin } from '../Blueprints/Login';
 import { environment } from '../../environments/environment';
-
+import { HttpClient } from '@angular/common/http';
 const url_head = environment.url_head;
 
 @Injectable()
@@ -16,7 +16,7 @@ export class LogService{
     private userCheckUrl="api/userLogin";
     private userMailCheckUrl="api/userLoginMail";
 
-    constructor(private _http:Http){}
+    constructor(private _http:Http, private http:HttpClient){}
 
     adminCheck(admin:AdminLogin):Observable<Response>{
         let headers = new Headers({'Content-Type':'application/json'});
@@ -49,4 +49,8 @@ export class LogService{
         console.error(error);
         return Observable.throw(error.json().error());
     }
+
+    getLogin(u) {
+        return this.http.post(`${url_head}user/login`,u );
+      }
 }

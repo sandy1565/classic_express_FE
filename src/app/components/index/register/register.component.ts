@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
   selectedState;
   selectedStateName;
   countries:any = [];
-  countryList:any = [];
+  countryList;
 
  constructor(private navbaruser:NavbarUserService,private superadminsidebar:SidebarSuperadminService,private adminsidebar: SidebarAdminService, private rt:Router,private svc:DataCourierService, private lvc:LocalAssets, private usvc:DataUserService){
    this.trackDiv=false;
@@ -87,7 +87,6 @@ export class RegisterComponent implements OnInit {
       console.log(this.Roles);
     });
 
-    this.countries = localStorage.getItem('countryList')
     // console.log(this.usvc.getCountryDetails().subscribe(res=>this.countryList=res));
     //  this.countryList);
 
@@ -134,7 +133,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onSelectCountry(country_id: number) {
-    // console.log();
     this.selectedCountry = country_id;
     this.states = this.getStates().filter(item => {
       return item.country_id === Number(country_id);
@@ -156,7 +154,7 @@ export class RegisterComponent implements OnInit {
   }
 
     getCountries() {
-      return JSON.parse(localStorage.getItem('countryDetails'));
+      return localStorage.getItem('countryDetails');
     }
   
     getStates() {

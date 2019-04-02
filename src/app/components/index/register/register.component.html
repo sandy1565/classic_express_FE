@@ -63,10 +63,10 @@
           <div class="col-md-6">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-flag-checkered"></i></span>
-              <select class="form-control" name="countryId" (change)="onSelectCountry($event.target.value)" required ngModel>
+              <select *ngIf="getCountries()" class="form-control" name="countryId" (change)="onSelectCountry($event.target.value)" required ngModel>
                   <!-- (change)="CtrChange($event.target.value)" -->
                 <option value="" selected>Country *</option>
-                <option *ngFor="let country of countries" value="{{ country.countryId }}">{{ country.countryName }}</option>
+                <option *ngFor = "let country of getCountries() keyvalue" value="{{ country.countryId }}">{{ country.countryName }}</option>
               </select>
             </div>
           </div>

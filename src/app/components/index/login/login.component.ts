@@ -10,6 +10,7 @@ import { DataAdminService } from '../../../services/AdminDataService';
 import {userDashboard} from '../../../services/UserDashService';
 import {adminDashboard} from '../../../services/AdminDashService';
 import { ROLES } from '../../../Blueprints/roles';
+import { NgForm } from '@angular/forms';
 declare var $: any;
 
 @Component({
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
   usChecker=false;
   blocker=false;
 
-  constructor(private navbaruser:NavbarUserService,private superadminsidebar:SidebarSuperadminService,private adminsidebar: SidebarAdminService,private svc:LogService, private rt:Router, private Usvc:DataUserService,private ush:userDashboard, private Asc:DataAdminService){
+  constructor(private navbaruser:NavbarUserService,private superadminsidebar:SidebarSuperadminService,private adminsidebar: SidebarAdminService,
+    private svc:LogService, private rt:Router, private Usvc:DataUserService,private ush:userDashboard, private Asc:DataAdminService){
    this.navbaruser.show();
    this.superadminsidebar.hide();
    this.adminsidebar.hide();
@@ -50,117 +52,30 @@ export class LoginComponent implements OnInit {
     this.rt.navigate(['uregister']);
   }
 
-  LoginSub(s){
+  LoginSub(loginForm:NgForm){
     console.log("hiiii")
-    if(this.trials==0){
-      alert("You Ran Out Of Tries !!"); 
-      this.rt.navigate(['']);
-    }
-    else if(s.role==ROLES.ADMIN){
-      this.adObj = new AdminLogin(parseInt(s.id_name), s.pass);
-      this.svc.adminCheck(this.adObj).subscribe( t => 
-        {
-          if(t.text()=="AdminFound"){
-            localStorage.setItem('admin',JSON.stringify(parseInt(s.id_name)));
-            this.Asc.GetAdminById(parseInt(s.id_name)).subscribe( t =>
-             { 
-              if(t.active){
-                adminDashboard.adminId =  parseInt(localStorage.getItem('admin'));
-                localStorage.setItem('adminCity',t.admincity);
-                this.rt.navigate(['admin']);
-              }else{
-                  this.blocker=true;
-              }
-            }
-          );
-          }else{
-            this.trials--;
-            this.adChecker=false;
-            this.usChecker=false;
-            this.Checker=true;
-          }
+    // if(this.trials==0){
+    //   alert("You Ran Out Of Tries !!"); 
+    //   this.rt.navigate(['']);
+    // }
+    this.svc.getLogin(loginForm.value).subscribe(data => {
+      var userRole = data['role'].roleName;
+      const token = data['accessToken'];
+      console.log(token);
+      console.log(data);
+      if(data['status'] === 200) {
+        if(userRole == "ADMIN"){
+          localStorage.setItem('token', data['accessToken']);
+          localStorage.setItem('admin', userRole);
+          this.rt.navigate(['admin']);
         }
-      );
-    }else if(s.role==ROLES.USER && !isNaN(s.id_name)){
-      this.usObj = new UserLogin(parseInt(s.id_name), s.pass,"");
-      this.svc.userCheck(this.usObj).subscribe( t => 
-        {
-          if(t.text()=="UserFound"){
-              localStorage.setItem('user',JSON.stringify(parseInt(s.id_name)));
-
-              this.Usvc.GetUserById(parseInt(s.id_name)).subscribe( t => 
-              {
-                if(t.ustat){
-                  userDashboard.userid = parseInt(localStorage.getItem('user')); 
-                  this.rt.navigate(['user']);
-                }else{
-                  this.blocker=true;
-                }
-              } 
-            );
-          }else{
-            this.trials--;
-            this.adChecker=false;
-            this.usChecker=false;
-            this.Checker=true;
-          }
-        });
-      }else if(s.role==ROLES.USER) {
-      // if( ( (<string>s.id_name).charAt(0)>='a' && (<string>s.id_name).charAt(0)<'z' ) || ((<string>s.id_name).charAt(0)>='A' && (<string>s.id_name).charAt(0)<='Z')){
-            this.usObj = new UserLogin(0, s.pass, s.id_name);
-            //console.log(this.usObj);
-            this.svc.userMailCheck(this.usObj).subscribe( t =>
-              {
-                if(parseInt(t.text())!=0 && t.text()!="Nfound"){
-                  localStorage.setItem('user',JSON.stringify(parseInt(t.text())));
-
-                  this.Usvc.GetUserById(parseInt(t.text())).subscribe( t =>
-                    {
-                      if(t.ustat){
-                        userDashboard.userid = parseInt(localStorage.getItem('user')); 
-                        this.rt.navigate(['user']);
-                      }
-                      else{
-                        this.blocker=true;
-                      }
-                    }
-                  );
-                }
-              }
-
-            );
-          }
-          else{
-            this.usObj = new UserLogin(0, s.pass, s.id_name);
-            //console.log(this.usObj);
-            this.svc.userMailCheck(this.usObj).subscribe( t =>
-              {
-                if(parseInt(t.text())!=0 && t.text()!="Nfound"){
-                  localStorage.setItem('user',JSON.stringify(parseInt(t.text())));
-
-                  this.Usvc.GetUserById(parseInt(t.text())).subscribe( t =>
-                    {
-                      if(t.ustat){
-                        userDashboard.userid = parseInt(localStorage.getItem('user')); 
-                        this.rt.navigate(['user']);
-                      }
-                      else{
-                        this.blocker=true;
-                      }
-                    }
-                  );
-                }
-              }
-
-            );
-
-
-            // this.trials--;
-            // this.adChecker=false;
-            // this.usChecker=false;
-            // this.Checker=true;
-          }
+        else if(userRole == "SUPER ADMIN"){
+          console.log("-------------------------")
         }
+      }  
+    });
+      }
+        
 
         Closer(){
           this.rt.navigate(['']);

@@ -11,18 +11,18 @@
       </div> 
         
       <div class="panel-body panel-pad">   
-        <form #loginForm="ngForm" (ngSubmit)="LoginSub(loginForm.value)" class="form-horizontal" role="form">
+        <form #loginForm="ngForm" (ngSubmit)="LoginSub(loginForm)" class="form-horizontal" role="form">
           <div class="input-group margT25"> 
               <!-- <select class="form-control trcont" name="role" required [(ngModel)]="ROLES.USER" style="width:125px;padding:5px;">  
                 <option *ngFor="let key of ROLES_DDL" [value]="ROLES[key]">{{ROLES[key]}}</option>
               </select> -->
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input type="text" class="form-control" name="id_name" placeholder="ID / Email" required ngModel> 
+            <input type="text" class="form-control" name="userName" placeholder="ID / Email" required ngModel> 
           </div>
               
           <div class="input-group margT25"> 
             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
-            <input type="password" class="form-control" name="pass" placeholder="Password" required ngModel> 
+            <input type="password" class="form-control" name="password" placeholder="Password" required ngModel> 
           </div>
           
           <div class="row slips">

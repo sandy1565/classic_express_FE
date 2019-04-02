@@ -6,7 +6,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { Admin_class } from '../Blueprints/aDmin';
 import { environment } from '../../environments/environment';
-
+import { authHeader } from '../../environments/authHeader';
 const url_head = environment.url_head;
 
 @Injectable()
@@ -17,7 +17,7 @@ export class DataAdminService
    private Update_admin_Url='api/upAdmin/';
    private Delete_admin_Url='api/delAdmin/';
    private Admin_access_Url='api/permitAdmin/';
-   private Admin_Obj_Url='api/getAdminObj/';
+   private Admin_Obj_Url='admin';
    private Prox_Users_Url='api/User_City/';
    private Admin_passo_Url='api/chAdminPass/';
 
@@ -60,10 +60,12 @@ export class DataAdminService
            .catch(this.handleError);
     }
 
+    // +id.toString()
     GetAdminById(id:number):Observable<Admin_class>{
-        return this._http.get(url_head+this.Admin_Obj_Url+id.toString())
-        .map( (res:Response) => <Admin_class> res.json() )
+        return this._http.get(url_head+this.Admin_Obj_Url)
+        .map( (res:Response) => <Admin_class> res.json(), { headers: authHeader()})
         .catch(this.handleError);
+       
     }
 
     ChangeAdminPass(id:string, newPass):Observable<Response>{
